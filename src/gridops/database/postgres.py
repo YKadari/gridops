@@ -2,12 +2,19 @@ from __future__ import annotations
 
 import pandas as pd
 import psycopg
+from datetime import datetime
 
 
 CREATE_SCHEMA_SQL = """
 CREATE SCHEMA IF NOT EXISTS raw;
 """
 
+LATEST_EIA_PERIOD_SQL = """
+SELECT MAX(period)
+FROM raw.eia_region_data
+WHERE respondent = %s
+  AND data_type = %s;
+"""
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS raw.eia_region_data (
@@ -109,3 +116,23 @@ def load_eia_data(
         connection.commit()
 
     return len(records)
+
+def get_latest_eia_period(
+    dsn: str,
+    *,
+    respondent: str = "PJM",
+    data_type: str = "D",
+) -> datetime | None:
+    with psycopg.connect(dsn) as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                LATEST_EIA_PERIOD_SQL,
+                (respondent, data_type),
+            )
+
+            row = cursor.fetchone()
+
+    if row is None:
+        return None
+
+    return row[0]

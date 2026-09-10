@@ -14,7 +14,7 @@ from gridops.tasks.eia import (
 
 @flow(
     name="gridops-eia-ingestion",
-    flow_run_name="pjm-demand-{start:%Y%m%d}-{end:%Y%m%d}",
+    flow_run_name="pjm-demand-{start:%Y%m%dT%H}-{end:%Y%m%dT%H}",
 )
 def eia_ingestion_flow(
     start: datetime,

@@ -11,7 +11,12 @@ from gridops.database.postgres import initialize_database, load_eia_data
 from gridops.ingestion.backfill import to_eia_inclusive_end
 from gridops.ingestion.eia import EIAClient
 from gridops.quality.eia import validate_eia_demand
-
+from gridops.database.postgres import (
+    get_latest_eia_period,
+    initialize_database,
+    load_eia_data,
+)
+from gridops.ingestion.incremental import plan_incremental_window
 
 def eia_timestamp(dt: datetime) -> str:
     return dt.strftime("%Y-%m-%dT%H")
@@ -116,3 +121,34 @@ def load_eia_postgres(
     )
 
     return loaded
+
+@task(name="plan-eia-incremental-window")
+def plan_eia_incremental_window_task(
+    respondent: str = "PJM",
+) -> tuple[datetime, datetime]:
+    logger = get_run_logger()
+    settings = Settings()
+
+    latest_period = get_latest_eia_period(
+        settings.postgres_dsn,
+        respondent=respondent,
+        data_type="D",
+    )
+
+    start, end = plan_incremental_window(
+        latest_period
+    )
+
+    logger.info(
+        "Latest stored %s observation: %s",
+        respondent,
+        latest_period,
+    )
+
+    logger.info(
+        "Planned incremental ingestion window: %s -> %s",
+        start,
+        end,
+    )
+
+    return start, end
