@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+
 import pandas as pd
 
 
@@ -13,23 +15,46 @@ REQUIRED_COLUMNS = {
     "value-units",
 }
 
+REQUIRED_NON_NULL_COLUMNS = {
+    "period",
+    "respondent",
+    "respondent-name",
+    "type",
+    "type-name",
+    "value-units",
+}
+
 UNIQUE_KEY = ["period", "respondent", "type"]
 
 
 class DataQualityError(ValueError):
-    """Raised when incoming EIA data violates the GridOps data contract."""
+    """Raised when EIA data violates a fatal GridOps data contract rule."""
+
+
+@dataclass
+class DataQualityReport:
+    warnings: list[str] = field(default_factory=list)
+    missing_value_count: int = 0
+    non_hourly_gap_count: int = 0
+
+    @property
+    def has_warnings(self) -> bool:
+        return bool(self.warnings)
 
 
 def validate_eia_demand(
     frame: pd.DataFrame,
     *,
     expected_respondent: str = "PJM",
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, DataQualityReport]:
     """
     Validate hourly EIA demand data.
 
-    Returns a cleaned and chronologically sorted DataFrame when all checks pass.
-    Raises DataQualityError if the incoming data violates the contract.
+    Fatal problems raise DataQualityError.
+
+    Source-level incompleteness, such as missing demand values or
+    missing hours, is preserved in the raw data and recorded as a
+    quality warning.
     """
 
     if frame.empty:
@@ -43,8 +68,12 @@ def validate_eia_demand(
         )
 
     validated = frame.copy()
+    report = DataQualityReport()
+    errors: list[str] = []
 
-    # Convert fields to the types GridOps expects.
+    # Preserve which values were genuinely missing at the source.
+    original_value = validated["value"].copy()
+
     validated["period"] = pd.to_datetime(
         validated["period"],
         utc=True,
@@ -56,22 +85,33 @@ def validate_eia_demand(
         errors="coerce",
     )
 
-    errors: list[str] = []
+    # Required metadata cannot be null.
+    null_counts = validated[
+        list(REQUIRED_NON_NULL_COLUMNS)
+    ].isna().sum()
 
-    # Required fields cannot be null.
-    null_counts = validated[list(REQUIRED_COLUMNS)].isna().sum()
     columns_with_nulls = null_counts[null_counts > 0]
 
     if not columns_with_nulls.empty:
         errors.append(
-            "Null values detected: "
+            "Null values detected in required fields: "
             + ", ".join(
                 f"{column}={count}"
                 for column, count in columns_with_nulls.items()
             )
         )
 
-    # We requested one specific balancing authority.
+    # Distinguish malformed numeric values from genuinely missing values.
+    invalid_numeric = (
+        original_value.notna()
+        & validated["value"].isna()
+    ).sum()
+
+    if invalid_numeric:
+        errors.append(
+            f"Found {invalid_numeric} non-numeric demand values."
+        )
+
     unexpected_respondents = set(
         validated["respondent"].dropna().unique()
     ) - {expected_respondent}
@@ -81,7 +121,6 @@ def validate_eia_demand(
             f"Unexpected respondents: {sorted(unexpected_respondents)}"
         )
 
-    # D is EIA's identifier for demand.
     unexpected_types = set(
         validated["type"].dropna().unique()
     ) - {"D"}
@@ -91,7 +130,6 @@ def validate_eia_demand(
             f"Unexpected data types: {sorted(unexpected_types)}"
         )
 
-    # Protect the modeling layer from impossible/suspicious values.
     negative_values = (validated["value"] < 0).sum()
 
     if negative_values:
@@ -99,7 +137,6 @@ def validate_eia_demand(
             f"Found {negative_values} negative demand values."
         )
 
-    # One observation per authority, metric and hour.
     duplicate_count = validated.duplicated(
         subset=UNIQUE_KEY,
         keep=False,
@@ -110,7 +147,17 @@ def validate_eia_demand(
             f"Found {duplicate_count} rows involved in duplicate keys."
         )
 
-    # Since EIA timestamps are UTC, DST does not create 23/25-hour days.
+    # Missing demand values are source-quality warnings, not fatal.
+    report.missing_value_count = int(
+        validated["value"].isna().sum()
+    )
+
+    if report.missing_value_count:
+        report.warnings.append(
+            f"{report.missing_value_count} demand values are missing."
+        )
+
+    # Missing hours are also warnings at the raw ingestion layer.
     periods = (
         validated["period"]
         .dropna()
@@ -125,18 +172,23 @@ def validate_eia_demand(
             differences.dt.total_seconds() != 3600
         ]
 
-        if not bad_gaps.empty:
-            errors.append(
-                f"Found {len(bad_gaps)} non-hourly gaps in the time series."
+        report.non_hourly_gap_count = len(bad_gaps)
+
+        if report.non_hourly_gap_count:
+            report.warnings.append(
+                f"{report.non_hourly_gap_count} non-hourly gaps detected."
             )
 
     if errors:
         raise DataQualityError(
-            "EIA data failed validation:\n- " + "\n- ".join(errors)
+            "EIA data failed validation:\n- "
+            + "\n- ".join(errors)
         )
 
-    return (
+    validated = (
         validated
         .sort_values("period")
         .reset_index(drop=True)
     )
+
+    return validated, report

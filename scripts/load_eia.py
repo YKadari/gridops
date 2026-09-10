@@ -29,7 +29,7 @@ def main() -> None:
     frame = pd.read_csv(latest_file)
 
     print("Validating data...")
-    validated = validate_eia_demand(frame)
+    validated, report = validate_eia_demand(frame)
 
     print(f"Validated {len(validated):,} rows.")
 

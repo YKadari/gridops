@@ -25,13 +25,19 @@ def main() -> None:
     frame = pd.read_csv(latest_file)
 
     try:
-        validated = validate_eia_demand(frame)
-
+        validated, report = validate_eia_demand(frame)
     except DataQualityError as exc:
         print()
         print("❌ DATA QUALITY CHECK FAILED")
         print(exc)
         raise SystemExit(1) from exc
+
+    if report.has_warnings:
+        print()
+        print("⚠ DATA QUALITY WARNINGS")
+
+        for warning in report.warnings:
+            print(f"- {warning}")
 
     print()
     print("✅ DATA QUALITY CHECK PASSED")

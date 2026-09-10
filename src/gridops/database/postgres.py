@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS raw.eia_region_data (
     respondent_name TEXT NOT NULL,
     data_type TEXT NOT NULL,
     type_name TEXT NOT NULL,
-    value DOUBLE PRECISION NOT NULL,
+    value DOUBLE PRECISION,
     value_units TEXT NOT NULL,
     ingested_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
@@ -24,6 +24,10 @@ CREATE TABLE IF NOT EXISTS raw.eia_region_data (
 );
 """
 
+ALLOW_NULL_VALUES_SQL = """
+ALTER TABLE raw.eia_region_data
+ALTER COLUMN value DROP NOT NULL;
+"""
 
 UPSERT_SQL = """
 INSERT INTO raw.eia_region_data (
@@ -59,9 +63,9 @@ def initialize_database(dsn: str) -> None:
         with connection.cursor() as cursor:
             cursor.execute(CREATE_SCHEMA_SQL)
             cursor.execute(CREATE_TABLE_SQL)
+            cursor.execute(ALLOW_NULL_VALUES_SQL)
 
         connection.commit()
-
 
 def load_eia_data(
     frame: pd.DataFrame,
@@ -75,6 +79,12 @@ def load_eia_data(
             "type-name": "type_name",
             "value-units": "value_units",
         }
+    )
+
+    database_frame["value"] = (
+    database_frame["value"]
+    .astype(object)
+    .where(database_frame["value"].notna(), None)
     )
 
     records = database_frame[

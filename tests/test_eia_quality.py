@@ -31,11 +31,11 @@ def sample_data() -> pd.DataFrame:
 
 
 def test_valid_data_passes() -> None:
-    result = validate_eia_demand(sample_data())
-
+    result, report = validate_eia_demand(sample_data())
     assert len(result) == 3
     assert result["period"].notna().all()
     assert result["value"].notna().all()
+    assert not report.has_warnings
 
 
 def test_duplicate_record_fails() -> None:
@@ -59,10 +59,22 @@ def test_negative_demand_fails() -> None:
         validate_eia_demand(frame)
 
 
-def test_missing_hour_fails() -> None:
+def test_missing_hour_creates_warning() -> None:
     frame = sample_data()
-
     frame = frame.drop(index=1)
 
-    with pytest.raises(DataQualityError):
-        validate_eia_demand(frame)
+    result, report = validate_eia_demand(frame)
+
+    assert len(result) == 2
+    assert report.non_hourly_gap_count == 1
+    assert report.has_warnings
+
+def test_missing_value_creates_warning() -> None:
+    frame = sample_data()
+    frame.loc[1, "value"] = None
+
+    result, report = validate_eia_demand(frame)
+
+    assert len(result) == 3
+    assert report.missing_value_count == 1
+    assert report.has_warnings
