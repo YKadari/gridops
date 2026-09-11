@@ -1,4 +1,3 @@
-from __future__ import annotations
 
 from prefect import flow
 from prefect.logging import get_run_logger
