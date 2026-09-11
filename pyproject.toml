@@ -14,7 +14,9 @@ dependencies = [
     "pydantic-settings>=2.5,<3",
     "tenacity>=9,<10",
     "psycopg[binary]>=3.2,<4",
-    "prefect>=3,<4"
+    "prefect>=3,<4",
+    "boto3>=1.40,<2",
+    "botocore[crt]>=1.40,<2"
 
 ]
 

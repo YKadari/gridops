@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     postgres_host: str = "localhost"
     postgres_port: int = 5432
 
+    aws_profile: str | None = None
+    aws_region: str = "us-east-1"
+    s3_raw_bucket: str
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

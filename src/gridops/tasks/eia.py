@@ -17,6 +17,11 @@ from gridops.database.postgres import (
 )
 from gridops.ingestion.incremental import plan_incremental_window
 
+from gridops.storage.s3 import (
+    build_raw_eia_key,
+    upload_eia_frame,
+)
+
 def eia_timestamp(dt: datetime) -> str:
     return dt.strftime("%Y-%m-%dT%H")
 
@@ -151,3 +156,42 @@ def plan_eia_incremental_window_task(
     )
 
     return start, end
+
+
+@task(
+    name="archive-eia-raw-s3",
+    retries=2,
+    retry_delay_seconds=10,
+)
+def archive_eia_raw_s3(
+    frame: pd.DataFrame,
+    *,
+    start: datetime,
+    end: datetime,
+    respondent: str = "PJM",
+) -> str:
+    logger = get_run_logger()
+    settings = Settings()
+
+    key = build_raw_eia_key(
+        respondent=respondent,
+        start=start,
+        end=end,
+    )
+
+    upload_eia_frame(
+        frame,
+        bucket=settings.s3_raw_bucket,
+        key=key,
+        profile_name=settings.aws_profile,
+        region_name=settings.aws_region,
+    )
+
+    logger.info(
+        "Archived %s raw EIA records to s3://%s/%s",
+        len(frame),
+        settings.s3_raw_bucket,
+        key,
+    )
+
+    return key

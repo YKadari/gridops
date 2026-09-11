@@ -5,6 +5,7 @@ from prefect import flow
 from prefect.logging import get_run_logger
 
 from gridops.tasks.eia import (
+    archive_eia_raw_s3,
     extract_eia_demand,
     load_eia_postgres,
     validate_eia_demand_task,
@@ -27,6 +28,13 @@ def eia_ingestion_flow(
     )
 
     raw_frame = extract_eia_demand(
+        start=start,
+        end=end,
+        respondent=respondent,
+    )
+
+    archive_eia_raw_s3(
+        raw_frame,
         start=start,
         end=end,
         respondent=respondent,
