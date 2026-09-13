@@ -41,13 +41,15 @@ function formatNumber(value: number) {
 }
 
 function formatDate(value: string) {
-  return new Date(value).toLocaleString(
-    "en-US",
-    {
-      dateStyle: "medium",
-      timeStyle: "short",
-    }
-  );
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+    timeZoneName: "short",
+  }).format(new Date(value));
 }
 
 function ForecastCard({
