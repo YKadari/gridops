@@ -1,0 +1,1 @@
+{"status": "ok", "start": "2026-09-12T15:00:00+00:00", "end": "2026-09-13T16:00:00+00:00", "raw_rows": 25, "dynamodb_rows": 25, "s3_key": "eia/respondent=PJM/metric=demand/year=2026/month=09/day=12/window_start=20260912T15/window_end=20260913T16/ingested_at=20260913T165903Z.csv", "warnings": []}

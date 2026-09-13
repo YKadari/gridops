@@ -1,0 +1,23 @@
+FROM public.ecr.aws/lambda/python:3.12
+
+RUN pip install --no-cache-dir \
+    numpy==2.5.3
+
+RUN pip install --no-cache-dir \
+    pandas==2.3.3
+
+COPY requirements-ingestion-lambda.txt \
+    ${LAMBDA_TASK_ROOT}/requirements-ingestion-lambda.txt
+
+RUN pip install \
+    --no-cache-dir \
+    -r ${LAMBDA_TASK_ROOT}/requirements-ingestion-lambda.txt
+
+COPY . ${LAMBDA_TASK_ROOT}
+
+RUN pip install \
+    --no-cache-dir \
+    --no-deps \
+    .
+
+CMD ["gridops.ingestion.lambda_handler.handler"]

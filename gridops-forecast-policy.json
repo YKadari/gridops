@@ -11,6 +11,15 @@
       "Resource": "arn:aws:dynamodb:us-east-1:818007713988:table/gridops-demand-serving"
     },
     {
+      "Sid": "WriteForecastHistory",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:Query"
+      ],
+      "Resource": "arn:aws:dynamodb:us-east-1:818007713988:table/gridops-forecast-history"
+    },
+    {
       "Sid": "ReadProductionModels",
       "Effect": "Allow",
       "Action": [

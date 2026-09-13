@@ -1,0 +1,6 @@
+[
+  {
+    "Id": "GridOpsHourlyForecast",
+    "Arn": "arn:aws:lambda:us-east-1:818007713988:function:gridops-forecast-api"
+  }
+]

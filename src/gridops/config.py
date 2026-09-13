@@ -48,6 +48,8 @@ class Settings(BaseSettings):
         "gridops-demand-serving"
     )
 
+    forecast_history_table: str = "gridops-forecast-history"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

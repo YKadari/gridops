@@ -23,7 +23,17 @@ class ModelService:
         self.metadata: dict[int, dict] = {}
 
     def load_models(self) -> None:
+        """
+        Load the 24h and 48h production champion models.
+
+        This method is idempotent so a warm Lambda invocation
+        does not download models that are already loaded.
+        """
         for horizon_hours in (24, 48):
+
+            if horizon_hours in self.models:
+                continue
+
             model, metadata = (
                 load_production_model_from_s3(
                     bucket=self.bucket,
@@ -33,8 +43,13 @@ class ModelService:
                 )
             )
 
-            self.models[horizon_hours] = model
-            self.metadata[horizon_hours] = metadata
+            self.models[
+                horizon_hours
+            ] = model
+
+            self.metadata[
+                horizon_hours
+            ] = metadata
 
     def is_ready(self) -> bool:
         return (
@@ -63,4 +78,6 @@ class ModelService:
             horizon_hours
         ].predict(frame)
 
-        return float(prediction[0])
+        return float(
+            prediction[0]
+        )
