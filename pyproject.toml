@@ -20,7 +20,8 @@ dependencies = [
     "dbt-postgres>=1.9,<2",
     "scikit-learn>=1.5,<2",
     "xgboost>=2.1,<4",
-    "holidays>=0.60,<1"
+    "holidays>=0.60,<1",
+    "mlflow>=3.1,<4"
 
 ]
 

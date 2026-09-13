@@ -1,0 +1,58 @@
+artifact_path: mlflow-artifacts:/1/models/m-5317dafe30424c7b9f5e189f1ee61d52/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.12.1
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - xgboost.core.Booster
+    - xgboost.sklearn.XGBRegressor
+is_signature_from_type_hint: false
+mlflow_version: 3.16.0
+model_id: m-5317dafe30424c7b9f5e189f1ee61d52
+model_size_bytes: 1343782
+model_uuid: m-5317dafe30424c7b9f5e189f1ee61d52
+prompts: null
+run_id: f863f2d030964dfb861cc0d23a8e0d33
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "demand_lag_50h", "required": true}, {"type":
+    "double", "name": "demand_lag_72h", "required": true}, {"type": "double", "name":
+    "demand_lag_168h", "required": true}, {"type": "double", "name": "demand_lag_336h",
+    "required": true}, {"type": "double", "name": "demand_rolling_mean_24h", "required":
+    true}, {"type": "double", "name": "demand_rolling_mean_168h", "required": true},
+    {"type": "long", "name": "demand_history_count_24h", "required": true}, {"type":
+    "long", "name": "demand_history_count_168h", "required": true}, {"type": "boolean",
+    "name": "is_weekend", "required": true}, {"type": "boolean", "name": "is_holiday",
+    "required": true}, {"type": "boolean", "name": "is_day_before_holiday", "required":
+    true}, {"type": "boolean", "name": "is_day_after_holiday", "required": true},
+    {"type": "double", "name": "cooling_degree_feature", "required": true}, {"type":
+    "double", "name": "heating_degree_feature", "required": true}, {"type": "double",
+    "name": "mean_temperature_forecast_48h", "required": true}, {"type": "double",
+    "name": "min_temperature_forecast_48h", "required": true}, {"type": "double",
+    "name": "max_temperature_forecast_48h", "required": true}, {"type": "double",
+    "name": "temperature_range_forecast_48h", "required": true}, {"type": "double",
+    "name": "mean_humidity_forecast_48h", "required": true}, {"type": "double", "name":
+    "mean_dew_point_forecast_48h", "required": true}, {"type": "double", "name": "mean_apparent_temperature_forecast_48h",
+    "required": true}, {"type": "double", "name": "mean_precipitation_forecast_48h",
+    "required": true}, {"type": "double", "name": "mean_wind_speed_forecast_48h",
+    "required": true}, {"type": "long", "name": "target_hour", "required": true},
+    {"type": "long", "name": "target_day_of_week", "required": true}, {"type": "long",
+    "name": "target_month", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float32", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-09-13 09:12:26.403734'
