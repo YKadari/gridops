@@ -77,7 +77,14 @@ services:
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      MLFLOW_TRACKING_URI: http://mlflow:5000
+      AWS_PROFILE: gridops-dev
+      AWS_REGION: us-east-1
+      AWS_CONFIG_FILE: /root/.aws/config
+
+    volumes:
+      - type: bind
+        source: "C:/Users/ykkad/.aws"
+        target: /root/.aws
 
     ports:
       - "8000:8000"
@@ -85,9 +92,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      mlflow:
-        condition: service_healthy
 
+        
   ingestion:
     image: gridops-api:dev
     container_name: gridops-ingestion

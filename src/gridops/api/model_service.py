@@ -1,25 +1,40 @@
 from __future__ import annotations
 
-import mlflow
-import mlflow.sklearn
 import pandas as pd
 
-
-MODEL_URIS = {
-    24: "models:/gridops-demand-24h@champion",
-    48: "models:/gridops-demand-48h@champion",
-}
+from gridops.modeling.production_loader import (
+    load_production_model_from_s3,
+)
 
 
 class ModelService:
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        bucket: str,
+        profile_name: str | None = None,
+        region_name: str | None = None,
+    ) -> None:
+        self.bucket = bucket
+        self.profile_name = profile_name
+        self.region_name = region_name
+
         self.models: dict[int, object] = {}
+        self.metadata: dict[int, dict] = {}
 
     def load_models(self) -> None:
-        for horizon, uri in MODEL_URIS.items():
-            self.models[horizon] = (
-                mlflow.sklearn.load_model(uri)
+        for horizon_hours in (24, 48):
+            model, metadata = (
+                load_production_model_from_s3(
+                    bucket=self.bucket,
+                    horizon_hours=horizon_hours,
+                    profile_name=self.profile_name,
+                    region_name=self.region_name,
+                )
             )
+
+            self.models[horizon_hours] = model
+            self.metadata[horizon_hours] = metadata
 
     def is_ready(self) -> bool:
         return (

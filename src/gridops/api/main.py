@@ -1,62 +1,50 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
-import os
-
-import mlflow
-from fastapi import FastAPI, HTTPException
-
 from datetime import datetime, timezone
+
+from fastapi import FastAPI, HTTPException
 
 from gridops.api.model_service import (
     ModelService,
 )
 from gridops.api.schemas import (
     LiveForecastResponse,
-    LiveForecastResponse,
     PredictionRequest24h,
     PredictionRequest48h,
     PredictionResponse,
 )
-
-
 from gridops.config import Settings
-
 from gridops.database.monitoring import (
     get_eia_freshness_status,
 )
-
 from gridops.inference.features import (
     build_inference_features,
 )
 
-model_service = ModelService()
+
 settings = Settings()
+
+model_service = ModelService(
+    bucket=settings.s3_raw_bucket,
+    profile_name=settings.aws_profile,
+    region_name=settings.aws_region,
+)
 
 
 @asynccontextmanager
 async def lifespan(
     app: FastAPI,
 ):
-    tracking_uri = os.getenv(
-        "MLFLOW_TRACKING_URI",
-        "http://127.0.0.1:5000",
-    )
-
-    mlflow.set_tracking_uri(
-        tracking_uri
-    )
-
     model_service.load_models()
 
     yield
-
 
 app = FastAPI(
     title="GridOps Forecasting API",
     description=(
         "PJM electricity-demand forecasting "
-        "service backed by MLflow champion models."
+        "service backed by production champion models."
     ),
     version="0.1.0",
     lifespan=lifespan,
