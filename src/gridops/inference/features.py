@@ -1,10 +1,6 @@
 from __future__ import annotations
 
-from datetime import (
-    datetime,
-    timedelta,
-    timezone,
-)
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import holidays
@@ -16,14 +12,11 @@ from gridops.ingestion.weather import (
     OpenMeteoClient,
     PJM_WEATHER_LOCATIONS,
 )
-from gridops.modeling.models import (
-    FEATURES_BY_HORIZON,
-)
+from gridops.modeling.models import FEATURES_BY_HORIZON
+from gridops.storage.dynamodb import query_demand_range
 
 
-EASTERN = ZoneInfo(
-    "America/New_York"
-)
+EASTERN = ZoneInfo("America/New_York")
 
 
 HORIZON_CONFIG = {
@@ -45,7 +38,6 @@ HORIZON_CONFIG = {
 def floor_to_utc_hour(
     value: datetime,
 ) -> datetime:
-
     value = value.astimezone(
         timezone.utc
     )
@@ -57,7 +49,12 @@ def floor_to_utc_hour(
     )
 
 
-def _load_demand_history(
+# ============================================================
+# PostgreSQL demand history
+# ============================================================
+
+
+def _load_demand_history_postgres(
     *,
     dsn: str,
     start: datetime,
@@ -86,7 +83,7 @@ def _load_demand_history(
     if not rows:
         raise RuntimeError(
             "No recent PJM demand data "
-            "was found for inference."
+            "was found in PostgreSQL."
         )
 
     frame = pd.DataFrame(
@@ -107,9 +104,8 @@ def _load_demand_history(
         errors="coerce",
     )
 
-    # Rebuild an explicit hourly spine.
-    # This prevents a missing source row from
-    # silently changing the meaning of our lags.
+    # Explicit hourly spine prevents a missing
+    # source row from silently changing lag meaning.
     hourly_index = pd.date_range(
         start=start,
         end=end,
@@ -123,12 +119,94 @@ def _load_demand_history(
             subset=["observed_at"],
             keep="last",
         )
-        .set_index("observed_at")
-        ["demand_value"]
+        .set_index("observed_at")[
+            "demand_value"
+        ]
         .reindex(hourly_index)
     )
 
     return demand
+
+
+# ============================================================
+# DynamoDB demand history
+# ============================================================
+
+
+def _load_demand_history_dynamodb(
+    *,
+    start: datetime,
+    end: datetime,
+    table_name: str,
+    profile_name: str | None,
+    region_name: str | None,
+) -> pd.Series:
+
+    items = query_demand_range(
+        start=start,
+        end=end,
+        table_name=table_name,
+        profile_name=profile_name,
+        region_name=region_name,
+        respondent="PJM",
+    )
+
+    if not items:
+        raise RuntimeError(
+            "No recent PJM demand data "
+            "was found in DynamoDB."
+        )
+
+    frame = pd.DataFrame(
+        [
+            {
+                "observed_at": item["sk"],
+                "demand_value": item["value"],
+            }
+            for item in items
+        ]
+    )
+
+    frame["observed_at"] = pd.to_datetime(
+        frame["observed_at"],
+        utc=True,
+    )
+
+    frame["demand_value"] = pd.to_numeric(
+        frame["demand_value"],
+        errors="coerce",
+    )
+
+    # Recreate the same explicit hourly spine
+    # used by the PostgreSQL path.
+    #
+    # Missing DynamoDB timestamps therefore
+    # become NaN rather than shifting lag positions.
+    hourly_index = pd.date_range(
+        start=start,
+        end=end,
+        freq="h",
+        tz="UTC",
+    )
+
+    demand = (
+        frame
+        .drop_duplicates(
+            subset=["observed_at"],
+            keep="last",
+        )
+        .set_index("observed_at")[
+            "demand_value"
+        ]
+        .reindex(hourly_index)
+    )
+
+    return demand
+
+
+# ============================================================
+# Demand feature helpers
+# ============================================================
 
 
 def _require_demand_value(
@@ -156,7 +234,7 @@ def _require_demand_value(
     return float(value)
 
 
-def _build_demand_features(
+def _build_demand_features_postgres(
     *,
     dsn: str,
     target_at: datetime,
@@ -190,13 +268,17 @@ def _build_demand_features(
 
     latest_needed = (
         target_at
-        - timedelta(hours=latest_lag)
+        - timedelta(
+            hours=latest_lag
+        )
     )
 
-    demand = _load_demand_history(
-        dsn=dsn,
-        start=earliest_needed,
-        end=latest_needed,
+    demand = (
+        _load_demand_history_postgres(
+            dsn=dsn,
+            start=earliest_needed,
+            end=latest_needed,
+        )
     )
 
     latest_feature_name = (
@@ -241,7 +323,9 @@ def _build_demand_features(
                 demand,
                 timestamp=(
                     target_at
-                    - timedelta(hours=168)
+                    - timedelta(
+                        hours=168
+                    )
                 ),
                 feature_name=(
                     "demand_lag_168h"
@@ -253,7 +337,9 @@ def _build_demand_features(
                 demand,
                 timestamp=(
                     target_at
-                    - timedelta(hours=336)
+                    - timedelta(
+                        hours=336
+                    )
                 ),
                 feature_name=(
                     "demand_lag_336h"
@@ -330,6 +416,197 @@ def _build_demand_features(
     return features
 
 
+def _build_demand_features_dynamodb(
+    *,
+    table_name: str,
+    profile_name: str | None,
+    region_name: str | None,
+    target_at: datetime,
+    horizon_hours: int,
+) -> dict[str, float]:
+
+    config = HORIZON_CONFIG[
+        horizon_hours
+    ]
+
+    latest_lag = int(
+        config["latest_lag"]
+    )
+
+    second_lag = int(
+        config["second_lag"]
+    )
+
+    rolling_24_start = int(
+        config["rolling_24_start"]
+    )
+
+    rolling_168_start = int(
+        config["rolling_168_start"]
+    )
+
+    earliest_needed = (
+        target_at
+        - timedelta(hours=336)
+    )
+
+    latest_needed = (
+        target_at
+        - timedelta(
+            hours=latest_lag
+        )
+    )
+
+    demand = (
+        _load_demand_history_dynamodb(
+            start=earliest_needed,
+            end=latest_needed,
+            table_name=table_name,
+            profile_name=profile_name,
+            region_name=region_name,
+        )
+    )
+
+    latest_feature_name = (
+        f"demand_lag_{latest_lag}h"
+    )
+
+    second_feature_name = (
+        f"demand_lag_{second_lag}h"
+    )
+
+    features = {
+        latest_feature_name:
+            _require_demand_value(
+                demand,
+                timestamp=(
+                    target_at
+                    - timedelta(
+                        hours=latest_lag
+                    )
+                ),
+                feature_name=(
+                    latest_feature_name
+                ),
+            ),
+
+        second_feature_name:
+            _require_demand_value(
+                demand,
+                timestamp=(
+                    target_at
+                    - timedelta(
+                        hours=second_lag
+                    )
+                ),
+                feature_name=(
+                    second_feature_name
+                ),
+            ),
+
+        "demand_lag_168h":
+            _require_demand_value(
+                demand,
+                timestamp=(
+                    target_at
+                    - timedelta(
+                        hours=168
+                    )
+                ),
+                feature_name=(
+                    "demand_lag_168h"
+                ),
+            ),
+
+        "demand_lag_336h":
+            _require_demand_value(
+                demand,
+                timestamp=(
+                    target_at
+                    - timedelta(
+                        hours=336
+                    )
+                ),
+                feature_name=(
+                    "demand_lag_336h"
+                ),
+            ),
+    }
+
+    rolling_24 = demand.loc[
+        pd.Timestamp(
+            target_at
+            - timedelta(
+                hours=rolling_24_start
+            )
+        ):
+        pd.Timestamp(
+            target_at
+            - timedelta(
+                hours=latest_lag
+            )
+        )
+    ]
+
+    rolling_168 = demand.loc[
+        pd.Timestamp(
+            target_at
+            - timedelta(
+                hours=rolling_168_start
+            )
+        ):
+        pd.Timestamp(
+            target_at
+            - timedelta(
+                hours=latest_lag
+            )
+        )
+    ]
+
+    if rolling_24.count() == 0:
+        raise RuntimeError(
+            "No usable demand values in "
+            "the recent 24-hour window."
+        )
+
+    if rolling_168.count() == 0:
+        raise RuntimeError(
+            "No usable demand values in "
+            "the recent 168-hour window."
+        )
+
+    features[
+        "demand_rolling_mean_24h"
+    ] = float(
+        rolling_24.mean()
+    )
+
+    features[
+        "demand_rolling_mean_168h"
+    ] = float(
+        rolling_168.mean()
+    )
+
+    features[
+        "demand_history_count_24h"
+    ] = float(
+        rolling_24.count()
+    )
+
+    features[
+        "demand_history_count_168h"
+    ] = float(
+        rolling_168.count()
+    )
+
+    return features
+
+
+# ============================================================
+# Live weather features
+# ============================================================
+
+
 def _build_weather_features(
     *,
     target_at: datetime,
@@ -359,7 +636,7 @@ def _build_weather_features(
 
         if len(matching) != 1:
             raise RuntimeError(
-                f"Expected one weather forecast "
+                "Expected one weather forecast "
                 f"for {location.location_id} at "
                 f"{target_at.isoformat()}, "
                 f"found {len(matching)}."
@@ -485,6 +762,11 @@ def _build_weather_features(
     }
 
 
+# ============================================================
+# Calendar / holiday features
+# ============================================================
+
+
 def _build_calendar_features(
     *,
     target_at: datetime,
@@ -508,12 +790,16 @@ def _build_calendar_features(
         )
     )
 
-    day_before = (
+    # If tomorrow is a holiday,
+    # today's target is the day before a holiday.
+    tomorrow = (
         local_date
         + timedelta(days=1)
     )
 
-    day_after = (
+    # If yesterday was a holiday,
+    # today's target is the day after a holiday.
+    yesterday = (
         local_date
         - timedelta(days=1)
     )
@@ -539,11 +825,21 @@ def _build_calendar_features(
             local_date in calendar,
 
         "is_day_before_holiday":
-            day_before in calendar,
+            tomorrow in calendar,
 
         "is_day_after_holiday":
-            day_after in calendar,
+            yesterday in calendar,
     }
+
+
+# ============================================================
+# Existing PostgreSQL-backed full inference builder
+#
+# IMPORTANT:
+# Keep this as the live API path for now.
+# We are not switching the API to DynamoDB until
+# parity testing is complete.
+# ============================================================
 
 
 def build_inference_features(
@@ -582,10 +878,13 @@ def build_inference_features(
         )
     )
 
-    features: dict[str, object] = {}
+    features: dict[
+        str,
+        object,
+    ] = {}
 
     features.update(
-        _build_demand_features(
+        _build_demand_features_postgres(
             dsn=dsn,
             target_at=target_at,
             horizon_hours=horizon_hours,
@@ -617,12 +916,105 @@ def build_inference_features(
 
     if missing:
         raise RuntimeError(
-            f"Inference feature builder "
+            "Inference feature builder "
             f"did not create: {missing}"
         )
 
-    # Return exactly the features used
-    # by the trained pipeline.
+    # Return exactly the features expected
+    # by the trained model, in model order.
+    ordered_features = {
+        feature: features[feature]
+        for feature in expected
+    }
+
+    return (
+        ordered_features,
+        issue_at,
+        target_at,
+    )
+
+def build_inference_features_dynamodb(
+    *,
+    table_name: str,
+    profile_name: str | None,
+    region_name: str | None,
+    horizon_hours: int,
+    now: datetime | None = None,
+) -> tuple[
+    dict[str, object],
+    datetime,
+    datetime,
+]:
+
+    if horizon_hours not in (
+        24,
+        48,
+    ):
+        raise ValueError(
+            "horizon_hours must be "
+            "24 or 48."
+        )
+
+    if now is None:
+        now = datetime.now(
+            timezone.utc
+        )
+
+    issue_at = floor_to_utc_hour(
+        now
+    )
+
+    target_at = (
+        issue_at
+        + timedelta(
+            hours=horizon_hours
+        )
+    )
+
+    features: dict[
+        str,
+        object,
+    ] = {}
+
+    features.update(
+        _build_demand_features_dynamodb(
+            table_name=table_name,
+            profile_name=profile_name,
+            region_name=region_name,
+            target_at=target_at,
+            horizon_hours=horizon_hours,
+        )
+    )
+
+    features.update(
+        _build_weather_features(
+            target_at=target_at,
+            horizon_hours=horizon_hours,
+        )
+    )
+
+    features.update(
+        _build_calendar_features(
+            target_at=target_at
+        )
+    )
+
+    expected = FEATURES_BY_HORIZON[
+        horizon_hours
+    ]
+
+    missing = [
+        feature
+        for feature in expected
+        if feature not in features
+    ]
+
+    if missing:
+        raise RuntimeError(
+            "DynamoDB inference feature builder "
+            f"did not create: {missing}"
+        )
+
     ordered_features = {
         feature: features[feature]
         for feature in expected

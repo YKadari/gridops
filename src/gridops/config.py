@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     aws_region: str = "us-east-1"
     s3_raw_bucket: str
 
+    dynamodb_demand_table: str = "gridops-demand-serving"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

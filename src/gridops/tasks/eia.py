@@ -22,6 +22,10 @@ from gridops.storage.s3 import (
     upload_eia_frame,
 )
 
+from gridops.storage.dynamodb import (
+    write_demand_rows,
+)
+
 def eia_timestamp(dt: datetime) -> str:
     return dt.strftime("%Y-%m-%dT%H")
 
@@ -195,3 +199,50 @@ def archive_eia_raw_s3(
     )
 
     return key
+
+
+@task(
+    name="load-eia-dynamodb",
+    retries=2,
+    retry_delay_seconds=10,
+)
+def load_eia_dynamodb(
+    frame: pd.DataFrame,
+    respondent: str = "PJM",
+) -> int:
+    logger = get_run_logger()
+    settings = Settings()
+
+    usable = frame[
+        frame["value"].notna()
+    ].copy()
+
+    rows = []
+
+    for _, row in usable.iterrows():
+        period = row["period"]
+
+        if hasattr(period, "to_pydatetime"):
+            period = period.to_pydatetime()
+
+        rows.append(
+            (
+                period,
+                float(row["value"]),
+            )
+        )
+
+    written = write_demand_rows(
+        rows,
+        table_name=settings.dynamodb_demand_table,
+        profile_name=settings.aws_profile,
+        region_name=settings.aws_region,
+        respondent=respondent,
+    )
+
+    logger.info(
+        "Loaded %s records into DynamoDB",
+        written,
+    )
+
+    return written

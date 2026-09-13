@@ -11,6 +11,14 @@ from gridops.tasks.eia import (
     validate_eia_demand_task,
 )
 
+from gridops.tasks.eia import (
+    archive_eia_raw_s3,
+    extract_eia_demand,
+    load_eia_dynamodb,
+    load_eia_postgres,
+    validate_eia_demand_task,
+)
+
 
 @flow(
     name="gridops-eia-ingestion",
@@ -49,9 +57,17 @@ def eia_ingestion_flow(
         validated_frame
     )
 
+    dynamodb_loaded = load_eia_dynamodb(
+        validated_frame,
+        respondent=respondent,
+    )
+
     logger.info(
-        "GridOps ingestion complete: %s rows processed",
+        "GridOps ingestion complete: "
+        "%s PostgreSQL rows, "
+        "%s DynamoDB rows processed",
         loaded,
+        dynamodb_loaded,
     )
 
     return loaded
