@@ -25,7 +25,7 @@ def plan_incremental_window(
     *,
     now: datetime | None = None,
     overlap_hours: int = 24,
-    source_lag_hours: int = 2,
+    source_lag_hours: int = 0,
     bootstrap_hours: int = 168,
 ) -> tuple[datetime, datetime]:
     """

@@ -37,11 +37,12 @@ def get_latest_eia_observation(
 ) -> datetime:
 
     query = """
-        SELECT MAX(observed_at)
-        FROM staging.stg_eia_demand
-        WHERE demand_value IS NOT NULL
+        SELECT MAX(period)
+        FROM raw.eia_region_data
+        WHERE respondent = 'PJM'
+          AND data_type = 'D'
+          AND value IS NOT NULL
     """
-
     with psycopg.connect(dsn) as connection:
         with connection.cursor() as cursor:
             cursor.execute(query)
@@ -142,13 +143,9 @@ def get_eia_freshness_status(
         microsecond=0,
     )
 
-    query = """
-        SELECT MAX(period)
-        FROM raw.eia_region_data
-        WHERE respondent = 'PJM'
-        AND data_type = 'D'
-        AND value IS NOT NULL
-    """
+    latest = get_latest_eia_observation(
+        dsn=dsn
+    )
 
     required_latest_at = (
         checked_hour
