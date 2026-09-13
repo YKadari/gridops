@@ -30,6 +30,9 @@ HOURLY_VARIABLES = (
 PREVIOUS_RUNS_URL = (
     "https://previous-runs-api.open-meteo.com/v1/forecast"
 )
+LIVE_FORECAST_URL = (
+    "https://api.open-meteo.com/v1/forecast"
+)
 
 FORECAST_WEATHER_VARIABLES = (
     "temperature_2m",

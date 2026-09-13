@@ -54,7 +54,7 @@ def get_sample_features(
     )
 
 
-def test_horizon(
+def check_horizon(
     *,
     dsn: str,
     horizon_hours: int,
@@ -147,7 +147,7 @@ def main() -> None:
         24,
         48,
     ):
-        test_horizon(
+        check_horizon(
             dsn=settings.postgres_dsn,
             horizon_hours=horizon_hours,
         )

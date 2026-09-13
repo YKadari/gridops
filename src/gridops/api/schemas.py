@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
-
+from datetime import datetime
 
 class PredictionResponse(BaseModel):
     horizon_hours: int
@@ -101,3 +101,15 @@ class PredictionRequest48h(BaseModel):
         ge=1,
         le=12,
     )
+
+class LiveForecastResponse(BaseModel):
+    horizon_hours: int
+
+    issue_at: datetime
+    target_at: datetime
+
+    predicted_demand: float
+
+    units: str = "megawatthours"
+
+    eia_latest_observed_at: datetime

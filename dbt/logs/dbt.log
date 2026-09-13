@@ -25895,3 +25895,1338 @@ parsing.
 [0m04:28:31.880632 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000202066961E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000202066D4D10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000202066D5790>]}
 [0m04:28:31.881638 [debug] [MainThread]: Flushing usage events
 [0m04:28:32.233514 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m06:40:27.286965 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262238BF800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002621FCFD4F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026223C29970>]}
+
+
+============================== 06:40:27.291001 | 0fcf921f-dbeb-460f-9445-a64e3503a265 ==============================
+[0m06:40:27.291001 [info ] [MainThread]: Running with dbt=1.12.4
+[0m06:40:27.292004 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'dbt', 'invocation_command': 'dbt run --project-dir dbt --profiles-dir dbt', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'use_colors': 'True', 'log_path': 'dbt\\logs'}
+[0m06:40:27.353957 [warn ] [MainThread]: [[33mWARNING[0m][DuplicateYAMLKeysDeprecation]: Deprecated functionality
+Duplicate key 'models' in "<unicode string>", line 25, column 1 in file
+`dbt\dbt_project.yml`
+[0m06:40:27.354958 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622564B9E0>]}
+[0m06:40:27.522973 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262257875F0>]}
+[0m06:40:27.599678 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262258D7530>]}
+[0m06:40:27.601694 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m06:40:27.830699 [debug] [MainThread]: checksum: 4fe2789d14a25dab9eeacc6f069526561635e6649ca9fc476574c6cabd428b27, vars: {}, profile: gridops, target: dev, version: 1.12.4
+[0m06:40:27.987528 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m06:40:27.987528 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m06:40:27.988513 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m06:40:27.999739 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026220E9CBC0>]}
+[0m06:40:28.192657 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m06:40:28.195868 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m06:40:28.227304 [debug] [MainThread]: Wrote artifact OsiDocument to dbt\target\osi_document.json
+[0m06:40:28.243263 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262259F1970>]}
+[0m06:40:28.244517 [info ] [MainThread]: Found 10 models, 1 seed, 51 data tests, 3 sources, 478 macros
+[0m06:40:28.245518 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026225A348F0>]}
+[0m06:40:28.247666 [info ] [MainThread]: 
+[0m06:40:28.248668 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m06:40:28.249667 [info ] [MainThread]: 
+[0m06:40:28.249667 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m06:40:28.254158 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops'
+[0m06:40:28.254158 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops'
+[0m06:40:28.264242 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops'
+[0m06:40:34.399245 [debug] [ThreadPool]: Using postgres connection "list_gridops"
+[0m06:40:34.399245 [debug] [ThreadPool]: Using postgres connection "list_gridops"
+[0m06:40:34.400254 [debug] [ThreadPool]: Using postgres connection "list_gridops"
+[0m06:40:34.400254 [debug] [ThreadPool]: On list_gridops: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m06:40:34.401255 [debug] [ThreadPool]: On list_gridops: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m06:40:34.401255 [debug] [ThreadPool]: On list_gridops: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m06:40:34.402265 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.403263 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.403263 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.433960 [debug] [ThreadPool]: SQL status: SELECT 10 in 0.031 seconds
+[0m06:40:34.435469 [debug] [ThreadPool]: SQL status: SELECT 10 in 0.032 seconds
+[0m06:40:34.437006 [debug] [ThreadPool]: On list_gridops: Close
+[0m06:40:34.439541 [debug] [ThreadPool]: On list_gridops: Close
+[0m06:40:34.447579 [debug] [ThreadPool]: SQL status: SELECT 10 in 0.045 seconds
+[0m06:40:34.450090 [debug] [ThreadPool]: On list_gridops: Close
+[0m06:40:34.454111 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops_reference'
+[0m06:40:34.455106 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops_intermediate'
+[0m06:40:34.464710 [debug] [ThreadPool]: Using postgres connection "list_gridops_reference"
+[0m06:40:34.465707 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops_marts'
+[0m06:40:34.469272 [debug] [ThreadPool]: Using postgres connection "list_gridops_intermediate"
+[0m06:40:34.470505 [debug] [ThreadPool]: Acquiring new postgres connection 'list_gridops_staging'
+[0m06:40:34.471501 [debug] [ThreadPool]: On list_gridops_reference: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops_reference"} */
+select
+      'gridops' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'reference'
+    union all
+    select
+      'gridops' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'reference'
+    union all
+    select
+      'gridops' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'reference'
+    union all
+    select distinct
+     'gridops' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'reference'
+  
+[0m06:40:34.471501 [debug] [ThreadPool]: Using postgres connection "list_gridops_marts"
+[0m06:40:34.471501 [debug] [ThreadPool]: On list_gridops_intermediate: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops_intermediate"} */
+select
+      'gridops' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'intermediate'
+    union all
+    select
+      'gridops' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'intermediate'
+    union all
+    select
+      'gridops' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'intermediate'
+    union all
+    select distinct
+     'gridops' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'intermediate'
+  
+[0m06:40:34.477955 [debug] [ThreadPool]: Using postgres connection "list_gridops_staging"
+[0m06:40:34.478534 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.480744 [debug] [ThreadPool]: On list_gridops_marts: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops_marts"} */
+select
+      'gridops' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'marts'
+    union all
+    select
+      'gridops' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'marts'
+    union all
+    select
+      'gridops' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'marts'
+    union all
+    select distinct
+     'gridops' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'marts'
+  
+[0m06:40:34.482425 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.483043 [debug] [ThreadPool]: On list_gridops_staging: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "list_gridops_staging"} */
+select
+      'gridops' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'staging'
+    union all
+    select
+      'gridops' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'staging'
+    union all
+    select
+      'gridops' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'staging'
+    union all
+    select distinct
+     'gridops' as database,
+     proname as name,
+     ns.nspname as schema,
+     'function' as type
+    from pg_proc
+     join pg_namespace as ns on pronamespace = ns.oid
+    where ns.nspname ilike 'staging'
+  
+[0m06:40:34.484839 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.485927 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m06:40:34.523540 [debug] [ThreadPool]: SQL status: SELECT 3 in 0.039 seconds
+[0m06:40:34.525533 [debug] [ThreadPool]: SQL status: SELECT 1 in 0.046 seconds
+[0m06:40:34.525533 [debug] [ThreadPool]: SQL status: SELECT 3 in 0.040 seconds
+[0m06:40:34.528535 [debug] [ThreadPool]: On list_gridops_marts: ROLLBACK
+[0m06:40:34.528535 [debug] [ThreadPool]: SQL status: SELECT 4 in 0.047 seconds
+[0m06:40:34.531073 [debug] [ThreadPool]: On list_gridops_reference: ROLLBACK
+[0m06:40:34.534071 [debug] [ThreadPool]: On list_gridops_staging: ROLLBACK
+[0m06:40:34.536653 [debug] [ThreadPool]: On list_gridops_intermediate: ROLLBACK
+[0m06:40:34.536653 [debug] [ThreadPool]: On list_gridops_marts: Close
+[0m06:40:34.538628 [debug] [ThreadPool]: On list_gridops_reference: Close
+[0m06:40:34.539630 [debug] [ThreadPool]: On list_gridops_staging: Close
+[0m06:40:34.539630 [debug] [ThreadPool]: On list_gridops_intermediate: Close
+[0m06:40:34.553854 [debug] [MainThread]: Using postgres connection "master"
+[0m06:40:34.554854 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m06:40:34.555876 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m06:40:34.602876 [debug] [MainThread]: SQL status: SELECT 15 in 0.047 seconds
+[0m06:40:34.606874 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026220E9CE60>]}
+[0m06:40:34.607861 [debug] [MainThread]: On master: ROLLBACK
+[0m06:40:34.609380 [debug] [MainThread]: On master: COMMIT
+[0m06:40:34.610899 [debug] [MainThread]: Using postgres connection "master"
+[0m06:40:34.611906 [debug] [MainThread]: On master: COMMIT
+[0m06:40:34.614906 [debug] [MainThread]: SQL status: COMMIT in 0.002 seconds
+[0m06:40:34.615910 [debug] [MainThread]: On master: Close
+[0m06:40:34.621772 [debug] [Thread-1 (]: Began running node model.gridops.int_calendar_hourly
+[0m06:40:34.621772 [debug] [Thread-2 (]: Began running node model.gridops.stg_eia_demand
+[0m06:40:34.621772 [debug] [Thread-3 (]: Began running node model.gridops.stg_weather_forecast_hourly
+[0m06:40:34.621772 [debug] [Thread-4 (]: Began running node model.gridops.stg_weather_hourly
+[0m06:40:34.621772 [info ] [Thread-1 (]: 1 of 10 START sql view model intermediate.int_calendar_hourly .................. [RUN]
+[0m06:40:34.621772 [info ] [Thread-2 (]: 2 of 10 START sql view model staging.stg_eia_demand ............................ [RUN]
+[0m06:40:34.629389 [info ] [Thread-3 (]: 3 of 10 START sql view model staging.stg_weather_forecast_hourly ............... [RUN]
+[0m06:40:34.629909 [info ] [Thread-4 (]: 4 of 10 START sql view model staging.stg_weather_hourly ........................ [RUN]
+[0m06:40:34.631922 [debug] [Thread-1 (]: Acquiring new postgres connection 'model.gridops.int_calendar_hourly'
+[0m06:40:34.633947 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.gridops.stg_eia_demand'
+[0m06:40:34.633947 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.gridops.stg_weather_forecast_hourly'
+[0m06:40:34.635501 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.gridops.stg_weather_hourly'
+[0m06:40:34.636521 [debug] [Thread-1 (]: Began compiling node model.gridops.int_calendar_hourly
+[0m06:40:34.637524 [debug] [Thread-2 (]: Began compiling node model.gridops.stg_eia_demand
+[0m06:40:34.638558 [debug] [Thread-3 (]: Began compiling node model.gridops.stg_weather_forecast_hourly
+[0m06:40:34.640789 [debug] [Thread-4 (]: Began compiling node model.gridops.stg_weather_hourly
+[0m06:40:34.649309 [debug] [Thread-1 (]: Writing injected SQL for node "model.gridops.int_calendar_hourly"
+[0m06:40:34.653338 [debug] [Thread-2 (]: Writing injected SQL for node "model.gridops.stg_eia_demand"
+[0m06:40:34.656324 [debug] [Thread-3 (]: Writing injected SQL for node "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.658327 [debug] [Thread-4 (]: Writing injected SQL for node "model.gridops.stg_weather_hourly"
+[0m06:40:34.661539 [debug] [Thread-1 (]: Began executing node model.gridops.int_calendar_hourly
+[0m06:40:34.662634 [debug] [Thread-2 (]: Began executing node model.gridops.stg_eia_demand
+[0m06:40:34.663630 [debug] [Thread-3 (]: Began executing node model.gridops.stg_weather_forecast_hourly
+[0m06:40:34.712923 [debug] [Thread-1 (]: Writing runtime sql for node "model.gridops.int_calendar_hourly"
+[0m06:40:34.717978 [debug] [Thread-2 (]: Writing runtime sql for node "model.gridops.stg_eia_demand"
+[0m06:40:34.720503 [debug] [Thread-4 (]: Began executing node model.gridops.stg_weather_hourly
+[0m06:40:34.724917 [debug] [Thread-3 (]: Writing runtime sql for node "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.732454 [debug] [Thread-4 (]: Writing runtime sql for node "model.gridops.stg_weather_hourly"
+[0m06:40:34.733448 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_calendar_hourly"
+[0m06:40:34.735463 [debug] [Thread-2 (]: Using postgres connection "model.gridops.stg_eia_demand"
+[0m06:40:34.737034 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_calendar_hourly"} */
+
+  create view "gridops"."intermediate"."int_calendar_hourly__dbt_tmp"
+    
+    
+  as (
+    with hours as (
+
+    select generate_series(
+        '2024-01-01 00:00:00+00'::timestamptz,
+        '2025-12-31 23:00:00+00'::timestamptz,
+        interval '1 hour'
+    ) as target_at
+
+),
+
+calendar as (
+
+    select
+        target_at,
+
+        (
+            target_at
+            at time zone 'America/New_York'
+        )::date as local_date
+
+    from hours
+
+),
+
+holiday_dates as (
+
+    select
+        holiday_date::date as holiday_date,
+        holiday_name
+
+    from "gridops"."reference"."us_federal_holidays"
+
+)
+
+select
+    calendar.target_at,
+    calendar.local_date,
+
+    holiday.holiday_date is not null
+        as is_holiday,
+
+    next_holiday.holiday_date is not null
+        as is_day_before_holiday,
+
+    previous_holiday.holiday_date is not null
+        as is_day_after_holiday
+
+from calendar
+
+left join holiday_dates as holiday
+    on calendar.local_date
+        = holiday.holiday_date
+
+left join holiday_dates as next_holiday
+    on calendar.local_date + 1
+        = next_holiday.holiday_date
+
+left join holiday_dates as previous_holiday
+    on calendar.local_date - 1
+        = previous_holiday.holiday_date
+  );
+[0m06:40:34.738035 [debug] [Thread-3 (]: Using postgres connection "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.738035 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_eia_demand"} */
+
+  create view "gridops"."staging"."stg_eia_demand__dbt_tmp"
+    
+    
+  as (
+    select
+    period as observed_at,
+    respondent,
+    respondent_name,
+    data_type,
+    type_name,
+    value as demand_value,
+    value_units,
+    ingested_at
+
+from "gridops"."raw"."eia_region_data"
+
+where respondent = 'PJM'
+  and data_type = 'D'
+  );
+[0m06:40:34.739586 [debug] [Thread-4 (]: Using postgres connection "model.gridops.stg_weather_hourly"
+[0m06:40:34.740602 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m06:40:34.741600 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_forecast_hourly"} */
+
+  create view "gridops"."staging"."stg_weather_forecast_hourly__dbt_tmp"
+    
+    
+  as (
+    select
+    valid_at,
+    location_id,
+    location_name,
+    latitude,
+    longitude,
+
+    temperature_2m_forecast_24h,
+    relative_humidity_2m_forecast_24h,
+    dew_point_2m_forecast_24h,
+    apparent_temperature_forecast_24h,
+    precipitation_forecast_24h,
+    wind_speed_10m_forecast_24h,
+
+    temperature_2m_forecast_48h,
+    relative_humidity_2m_forecast_48h,
+    dew_point_2m_forecast_48h,
+    apparent_temperature_forecast_48h,
+    precipitation_forecast_48h,
+    wind_speed_10m_forecast_48h,
+
+    ingested_at
+
+from "gridops"."raw"."weather_forecast_hourly"
+
+where valid_at >= '2024-01-01 00:00:00+00'
+  and valid_at <  '2026-01-01 00:00:00+00'
+  );
+[0m06:40:34.742605 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m06:40:34.742605 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_hourly"} */
+
+  create view "gridops"."staging"."stg_weather_hourly__dbt_tmp"
+    
+    
+  as (
+    select
+    observed_at,
+    location_id,
+    location_name,
+
+    latitude,
+    longitude,
+
+    temperature_2m,
+    relative_humidity_2m,
+    dew_point_2m,
+    apparent_temperature,
+    precipitation,
+    wind_speed_10m,
+
+    ingested_at
+
+from "gridops"."raw"."weather_hourly"
+
+where observed_at >= '2023-01-01 00:00:00+00'
+  and observed_at <  '2026-01-01 00:00:00+00'
+  );
+[0m06:40:34.744598 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m06:40:34.745599 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m06:40:34.774874 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.032 seconds
+[0m06:40:34.784661 [debug] [Thread-2 (]: Using postgres connection "model.gridops.stg_eia_demand"
+[0m06:40:34.785626 [debug] [Thread-3 (]: SQL status: CREATE VIEW in 0.041 seconds
+[0m06:40:34.786623 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_eia_demand"} */
+alter table "gridops"."staging"."stg_eia_demand" rename to "stg_eia_demand__dbt_backup"
+[0m06:40:34.790156 [debug] [Thread-3 (]: Using postgres connection "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.791165 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_forecast_hourly"} */
+alter table "gridops"."staging"."stg_weather_forecast_hourly" rename to "stg_weather_forecast_hourly__dbt_backup"
+[0m06:40:34.792159 [debug] [Thread-4 (]: SQL status: CREATE VIEW in 0.046 seconds
+[0m06:40:34.793158 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.053 seconds
+[0m06:40:34.793158 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m06:40:34.797164 [debug] [Thread-4 (]: Using postgres connection "model.gridops.stg_weather_hourly"
+[0m06:40:34.798362 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.004 seconds
+[0m06:40:34.803901 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_calendar_hourly"
+[0m06:40:34.806909 [debug] [Thread-2 (]: Using postgres connection "model.gridops.stg_eia_demand"
+[0m06:40:34.807957 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_hourly"} */
+alter table "gridops"."staging"."stg_weather_hourly" rename to "stg_weather_hourly__dbt_backup"
+[0m06:40:34.811000 [debug] [Thread-3 (]: Using postgres connection "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.812703 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_calendar_hourly"} */
+alter table "gridops"."intermediate"."int_calendar_hourly" rename to "int_calendar_hourly__dbt_backup"
+[0m06:40:34.812703 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_eia_demand"} */
+alter table "gridops"."staging"."stg_eia_demand__dbt_tmp" rename to "stg_eia_demand"
+[0m06:40:34.813693 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_forecast_hourly"} */
+alter table "gridops"."staging"."stg_weather_forecast_hourly__dbt_tmp" rename to "stg_weather_forecast_hourly"
+[0m06:40:34.816114 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m06:40:34.820826 [debug] [Thread-4 (]: Using postgres connection "model.gridops.stg_weather_hourly"
+[0m06:40:34.821593 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.006 seconds
+[0m06:40:34.821593 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.004 seconds
+[0m06:40:34.822611 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.005 seconds
+[0m06:40:34.823605 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_hourly"} */
+alter table "gridops"."staging"."stg_weather_hourly__dbt_tmp" rename to "stg_weather_hourly"
+[0m06:40:34.826606 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_calendar_hourly"
+[0m06:40:34.857407 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: COMMIT
+[0m06:40:34.861020 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: COMMIT
+[0m06:40:34.863033 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_calendar_hourly"} */
+alter table "gridops"."intermediate"."int_calendar_hourly__dbt_tmp" rename to "int_calendar_hourly"
+[0m06:40:34.864034 [debug] [Thread-3 (]: Using postgres connection "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.866040 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m06:40:34.867044 [debug] [Thread-2 (]: Using postgres connection "model.gridops.stg_eia_demand"
+[0m06:40:34.868044 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: COMMIT
+[0m06:40:34.871060 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: COMMIT
+[0m06:40:34.871060 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.005 seconds
+[0m06:40:34.871060 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: COMMIT
+[0m06:40:34.871060 [debug] [Thread-4 (]: Using postgres connection "model.gridops.stg_weather_hourly"
+[0m06:40:34.871060 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: COMMIT
+[0m06:40:34.879548 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: COMMIT
+[0m06:40:34.880970 [debug] [Thread-3 (]: SQL status: COMMIT in 0.006 seconds
+[0m06:40:34.881977 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_calendar_hourly"
+[0m06:40:34.893026 [debug] [Thread-3 (]: Applying DROP to: "gridops"."staging"."stg_weather_forecast_hourly__dbt_backup"
+[0m06:40:34.894027 [debug] [Thread-2 (]: SQL status: COMMIT in 0.015 seconds
+[0m06:40:34.895038 [debug] [Thread-4 (]: SQL status: COMMIT in 0.012 seconds
+[0m06:40:34.896068 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: COMMIT
+[0m06:40:34.903729 [debug] [Thread-3 (]: Using postgres connection "model.gridops.stg_weather_forecast_hourly"
+[0m06:40:34.906647 [debug] [Thread-2 (]: Applying DROP to: "gridops"."staging"."stg_eia_demand__dbt_backup"
+[0m06:40:34.909640 [debug] [Thread-4 (]: Applying DROP to: "gridops"."staging"."stg_weather_hourly__dbt_backup"
+[0m06:40:34.910151 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_forecast_hourly"} */
+drop view if exists "gridops"."staging"."stg_weather_forecast_hourly__dbt_backup" cascade
+[0m06:40:34.912461 [debug] [Thread-2 (]: Using postgres connection "model.gridops.stg_eia_demand"
+[0m06:40:34.913461 [debug] [Thread-4 (]: Using postgres connection "model.gridops.stg_weather_hourly"
+[0m06:40:34.915464 [debug] [Thread-1 (]: SQL status: COMMIT in 0.005 seconds
+[0m06:40:34.916463 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_eia_demand"} */
+drop view if exists "gridops"."staging"."stg_eia_demand__dbt_backup" cascade
+[0m06:40:34.917462 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.stg_weather_hourly"} */
+drop view if exists "gridops"."staging"."stg_weather_hourly__dbt_backup" cascade
+[0m06:40:34.919338 [debug] [Thread-1 (]: Applying DROP to: "gridops"."intermediate"."int_calendar_hourly__dbt_backup"
+[0m06:40:34.921344 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_calendar_hourly"
+[0m06:40:34.922515 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_calendar_hourly"} */
+drop view if exists "gridops"."intermediate"."int_calendar_hourly__dbt_backup" cascade
+[0m06:40:34.926524 [debug] [Thread-3 (]: SQL status: DROP VIEW in 0.012 seconds
+[0m06:40:34.930026 [debug] [Thread-3 (]: On model.gridops.stg_weather_forecast_hourly: Close
+[0m06:40:34.931035 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.008 seconds
+[0m06:40:34.934043 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.014 seconds
+[0m06:40:34.937087 [debug] [Thread-1 (]: On model.gridops.int_calendar_hourly: Close
+[0m06:40:34.939629 [debug] [Thread-2 (]: On model.gridops.stg_eia_demand: Close
+[0m06:40:34.940644 [debug] [Thread-4 (]: SQL status: DROP VIEW in 0.019 seconds
+[0m06:40:34.940644 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622333C5F0>]}
+[0m06:40:34.942641 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262258FA9F0>]}
+[0m06:40:34.943641 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026225E3A630>]}
+[0m06:40:34.945643 [debug] [Thread-4 (]: On model.gridops.stg_weather_hourly: Close
+[0m06:40:34.947714 [info ] [Thread-3 (]: 3 of 10 OK created sql view model staging.stg_weather_forecast_hourly .......... [[32mCREATE VIEW[0m in 0.30s]
+[0m06:40:34.947714 [info ] [Thread-1 (]: 1 of 10 OK created sql view model intermediate.int_calendar_hourly ............. [[32mCREATE VIEW[0m in 0.31s]
+[0m06:40:34.949476 [info ] [Thread-2 (]: 2 of 10 OK created sql view model staging.stg_eia_demand ....................... [[32mCREATE VIEW[0m in 0.31s]
+[0m06:40:34.951486 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262261B2AE0>]}
+[0m06:40:34.952489 [debug] [Thread-3 (]: Finished running node model.gridops.stg_weather_forecast_hourly
+[0m06:40:34.953490 [debug] [Thread-1 (]: Finished running node model.gridops.int_calendar_hourly
+[0m06:40:34.954484 [debug] [Thread-2 (]: Finished running node model.gridops.stg_eia_demand
+[0m06:40:34.955495 [info ] [Thread-4 (]: 4 of 10 OK created sql view model staging.stg_weather_hourly ................... [[32mCREATE VIEW[0m in 0.32s]
+[0m06:40:34.957486 [debug] [Thread-3 (]: Began running node model.gridops.int_weather_forecast_regional_hourly
+[0m06:40:34.958485 [debug] [Thread-1 (]: Began running node model.gridops.int_eia_demand_hourly
+[0m06:40:34.959486 [debug] [Thread-4 (]: Finished running node model.gridops.stg_weather_hourly
+[0m06:40:34.960019 [info ] [Thread-3 (]: 5 of 10 START sql view model intermediate.int_weather_forecast_regional_hourly . [RUN]
+[0m06:40:34.961030 [info ] [Thread-1 (]: 6 of 10 START sql view model intermediate.int_eia_demand_hourly ................ [RUN]
+[0m06:40:34.962042 [debug] [Thread-2 (]: Began running node model.gridops.int_weather_regional_hourly
+[0m06:40:34.963040 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.gridops.stg_weather_forecast_hourly, now model.gridops.int_weather_forecast_regional_hourly)
+[0m06:40:34.965039 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.gridops.int_calendar_hourly, now model.gridops.int_eia_demand_hourly)
+[0m06:40:34.965039 [info ] [Thread-2 (]: 7 of 10 START sql view model intermediate.int_weather_regional_hourly .......... [RUN]
+[0m06:40:34.966549 [debug] [Thread-3 (]: Began compiling node model.gridops.int_weather_forecast_regional_hourly
+[0m06:40:34.967559 [debug] [Thread-1 (]: Began compiling node model.gridops.int_eia_demand_hourly
+[0m06:40:34.968558 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.gridops.stg_eia_demand, now model.gridops.int_weather_regional_hourly)
+[0m06:40:34.970936 [debug] [Thread-3 (]: Writing injected SQL for node "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:34.975788 [debug] [Thread-1 (]: Writing injected SQL for node "model.gridops.int_eia_demand_hourly"
+[0m06:40:34.976787 [debug] [Thread-2 (]: Began compiling node model.gridops.int_weather_regional_hourly
+[0m06:40:34.979293 [debug] [Thread-3 (]: Began executing node model.gridops.int_weather_forecast_regional_hourly
+[0m06:40:34.982815 [debug] [Thread-2 (]: Writing injected SQL for node "model.gridops.int_weather_regional_hourly"
+[0m06:40:34.983826 [debug] [Thread-1 (]: Began executing node model.gridops.int_eia_demand_hourly
+[0m06:40:34.989347 [debug] [Thread-3 (]: Writing runtime sql for node "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:34.995646 [debug] [Thread-1 (]: Writing runtime sql for node "model.gridops.int_eia_demand_hourly"
+[0m06:40:34.996949 [debug] [Thread-2 (]: Began executing node model.gridops.int_weather_regional_hourly
+[0m06:40:35.003495 [debug] [Thread-2 (]: Writing runtime sql for node "model.gridops.int_weather_regional_hourly"
+[0m06:40:35.005488 [debug] [Thread-3 (]: Using postgres connection "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:35.006493 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_eia_demand_hourly"
+[0m06:40:35.007492 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_forecast_regional_hourly"} */
+
+  create view "gridops"."intermediate"."int_weather_forecast_regional_hourly__dbt_tmp"
+    
+    
+  as (
+    with forecasts as (
+
+    select *
+    from "gridops"."staging"."stg_weather_forecast_hourly"
+
+),
+
+regional as (
+
+    select
+        valid_at,
+
+        count(distinct location_id)
+            as forecast_location_count,
+
+        avg(temperature_2m_forecast_24h)
+            as mean_temperature_forecast_24h,
+
+        min(temperature_2m_forecast_24h)
+            as min_temperature_forecast_24h,
+
+        max(temperature_2m_forecast_24h)
+            as max_temperature_forecast_24h,
+
+        avg(relative_humidity_2m_forecast_24h)
+            as mean_humidity_forecast_24h,
+
+        avg(dew_point_2m_forecast_24h)
+            as mean_dew_point_forecast_24h,
+
+        avg(apparent_temperature_forecast_24h)
+            as mean_apparent_temperature_forecast_24h,
+
+        avg(precipitation_forecast_24h)
+            as mean_precipitation_forecast_24h,
+
+        avg(wind_speed_10m_forecast_24h)
+            as mean_wind_speed_forecast_24h,
+
+        avg(temperature_2m_forecast_48h)
+            as mean_temperature_forecast_48h,
+
+        min(temperature_2m_forecast_48h)
+            as min_temperature_forecast_48h,
+
+        max(temperature_2m_forecast_48h)
+            as max_temperature_forecast_48h,
+
+        avg(relative_humidity_2m_forecast_48h)
+            as mean_humidity_forecast_48h,
+
+        avg(dew_point_2m_forecast_48h)
+            as mean_dew_point_forecast_48h,
+
+        avg(apparent_temperature_forecast_48h)
+            as mean_apparent_temperature_forecast_48h,
+
+        avg(precipitation_forecast_48h)
+            as mean_precipitation_forecast_48h,
+
+        avg(wind_speed_10m_forecast_48h)
+            as mean_wind_speed_forecast_48h
+
+    from forecasts
+
+    group by valid_at
+
+)
+
+select *
+from regional
+  );
+[0m06:40:35.008490 [debug] [Thread-2 (]: Using postgres connection "model.gridops.int_weather_regional_hourly"
+[0m06:40:35.009491 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_eia_demand_hourly"} */
+
+  create view "gridops"."intermediate"."int_eia_demand_hourly__dbt_tmp"
+    
+    
+  as (
+    with historical_demand as (
+
+    select
+        observed_at,
+        respondent,
+        respondent_name,
+        data_type,
+        type_name,
+        demand_value,
+        value_units,
+        ingested_at
+
+    from "gridops"."staging"."stg_eia_demand"
+
+    where observed_at >= '2023-01-01 00:00:00+00'
+      and observed_at <  '2026-01-01 00:00:00+00'
+
+),
+
+hourly_spine as (
+
+    select
+        generate_series(
+            '2023-01-01 00:00:00+00'::timestamptz,
+            '2025-12-31 23:00:00+00'::timestamptz,
+            interval '1 hour'
+        ) as observed_at
+
+),
+
+joined as (
+
+    select
+        spine.observed_at,
+
+        demand.respondent,
+        demand.respondent_name,
+        demand.data_type,
+        demand.type_name,
+        demand.demand_value,
+        demand.value_units,
+        demand.ingested_at,
+
+        demand.observed_at is null
+            as is_missing_source_row,
+
+        demand.demand_value is null
+            as is_missing_demand
+
+    from hourly_spine as spine
+
+    left join historical_demand as demand
+        on spine.observed_at = demand.observed_at
+
+)
+
+select *
+from joined
+  );
+[0m06:40:35.011190 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m06:40:35.012206 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_regional_hourly"} */
+
+  create view "gridops"."intermediate"."int_weather_regional_hourly__dbt_tmp"
+    
+    
+  as (
+    with weather as (
+
+    select
+        observed_at,
+        location_id,
+        temperature_2m,
+        relative_humidity_2m,
+        dew_point_2m,
+        apparent_temperature,
+        precipitation,
+        wind_speed_10m
+
+    from "gridops"."staging"."stg_weather_hourly"
+
+),
+
+aggregated as (
+
+    select
+        observed_at,
+
+        count(distinct location_id)
+            as weather_location_count,
+
+        avg(temperature_2m)
+            as mean_temperature_2m,
+
+        min(temperature_2m)
+            as min_temperature_2m,
+
+        max(temperature_2m)
+            as max_temperature_2m,
+
+        avg(relative_humidity_2m)
+            as mean_relative_humidity_2m,
+
+        avg(dew_point_2m)
+            as mean_dew_point_2m,
+
+        avg(apparent_temperature)
+            as mean_apparent_temperature,
+
+        avg(precipitation)
+            as mean_precipitation,
+
+        max(precipitation)
+            as max_precipitation,
+
+        avg(wind_speed_10m)
+            as mean_wind_speed_10m,
+
+        max(wind_speed_10m)
+            as max_wind_speed_10m
+
+    from weather
+
+    group by observed_at
+
+)
+
+select *
+from aggregated
+  );
+[0m06:40:35.013204 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m06:40:35.016218 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m06:40:35.054441 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.040 seconds
+[0m06:40:35.054441 [debug] [Thread-3 (]: SQL status: CREATE VIEW in 0.044 seconds
+[0m06:40:35.059443 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_eia_demand_hourly"
+[0m06:40:35.059980 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.044 seconds
+[0m06:40:35.064023 [debug] [Thread-3 (]: Using postgres connection "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:35.065022 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_eia_demand_hourly"} */
+alter table "gridops"."intermediate"."int_eia_demand_hourly__dbt_tmp" rename to "int_eia_demand_hourly"
+[0m06:40:35.068414 [debug] [Thread-2 (]: Using postgres connection "model.gridops.int_weather_regional_hourly"
+[0m06:40:35.070457 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_forecast_regional_hourly"} */
+alter table "gridops"."intermediate"."int_weather_forecast_regional_hourly__dbt_tmp" rename to "int_weather_forecast_regional_hourly"
+[0m06:40:35.071445 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_regional_hourly"} */
+alter table "gridops"."intermediate"."int_weather_regional_hourly__dbt_tmp" rename to "int_weather_regional_hourly"
+[0m06:40:35.071445 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m06:40:35.071445 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m06:40:35.076373 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m06:40:35.080105 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: COMMIT
+[0m06:40:35.084391 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: COMMIT
+[0m06:40:35.087213 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: COMMIT
+[0m06:40:35.088894 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_eia_demand_hourly"
+[0m06:40:35.090006 [debug] [Thread-3 (]: Using postgres connection "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:35.091193 [debug] [Thread-2 (]: Using postgres connection "model.gridops.int_weather_regional_hourly"
+[0m06:40:35.092407 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: COMMIT
+[0m06:40:35.093561 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: COMMIT
+[0m06:40:35.094125 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: COMMIT
+[0m06:40:35.101312 [debug] [Thread-1 (]: SQL status: COMMIT in 0.006 seconds
+[0m06:40:35.104371 [debug] [Thread-1 (]: Applying DROP to: "gridops"."intermediate"."int_eia_demand_hourly__dbt_backup"
+[0m06:40:35.105560 [debug] [Thread-2 (]: SQL status: COMMIT in 0.009 seconds
+[0m06:40:35.106182 [debug] [Thread-3 (]: SQL status: COMMIT in 0.010 seconds
+[0m06:40:35.107305 [debug] [Thread-1 (]: Using postgres connection "model.gridops.int_eia_demand_hourly"
+[0m06:40:35.110147 [debug] [Thread-2 (]: Applying DROP to: "gridops"."intermediate"."int_weather_regional_hourly__dbt_backup"
+[0m06:40:35.114289 [debug] [Thread-3 (]: Applying DROP to: "gridops"."intermediate"."int_weather_forecast_regional_hourly__dbt_backup"
+[0m06:40:35.115472 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_eia_demand_hourly"} */
+drop view if exists "gridops"."intermediate"."int_eia_demand_hourly__dbt_backup" cascade
+[0m06:40:35.119225 [debug] [Thread-2 (]: Using postgres connection "model.gridops.int_weather_regional_hourly"
+[0m06:40:35.120607 [debug] [Thread-3 (]: Using postgres connection "model.gridops.int_weather_forecast_regional_hourly"
+[0m06:40:35.122605 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_regional_hourly"} */
+drop view if exists "gridops"."intermediate"."int_weather_regional_hourly__dbt_backup" cascade
+[0m06:40:35.123121 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.int_weather_forecast_regional_hourly"} */
+drop view if exists "gridops"."intermediate"."int_weather_forecast_regional_hourly__dbt_backup" cascade
+[0m06:40:35.123121 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.002 seconds
+[0m06:40:35.126935 [debug] [Thread-1 (]: On model.gridops.int_eia_demand_hourly: Close
+[0m06:40:35.127440 [debug] [Thread-3 (]: SQL status: DROP VIEW in 0.003 seconds
+[0m06:40:35.128340 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.004 seconds
+[0m06:40:35.129405 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622665E450>]}
+[0m06:40:35.132398 [debug] [Thread-3 (]: On model.gridops.int_weather_forecast_regional_hourly: Close
+[0m06:40:35.135304 [debug] [Thread-2 (]: On model.gridops.int_weather_regional_hourly: Close
+[0m06:40:35.136417 [info ] [Thread-1 (]: 6 of 10 OK created sql view model intermediate.int_eia_demand_hourly ........... [[32mCREATE VIEW[0m in 0.17s]
+[0m06:40:35.138750 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026225AE7A10>]}
+[0m06:40:35.140766 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026226642210>]}
+[0m06:40:35.142552 [debug] [Thread-1 (]: Finished running node model.gridops.int_eia_demand_hourly
+[0m06:40:35.144469 [info ] [Thread-3 (]: 5 of 10 OK created sql view model intermediate.int_weather_forecast_regional_hourly  [[32mCREATE VIEW[0m in 0.18s]
+[0m06:40:35.146265 [info ] [Thread-2 (]: 7 of 10 OK created sql view model intermediate.int_weather_regional_hourly ..... [[32mCREATE VIEW[0m in 0.17s]
+[0m06:40:35.148042 [debug] [Thread-3 (]: Finished running node model.gridops.int_weather_forecast_regional_hourly
+[0m06:40:35.149241 [debug] [Thread-2 (]: Finished running node model.gridops.int_weather_regional_hourly
+[0m06:40:35.150904 [debug] [Thread-4 (]: Began running node model.gridops.demand_forecast_features_24h
+[0m06:40:35.152042 [debug] [Thread-1 (]: Began running node model.gridops.demand_forecast_features_48h
+[0m06:40:35.153681 [debug] [Thread-3 (]: Began running node model.gridops.demand_weather_training_base
+[0m06:40:35.154682 [info ] [Thread-4 (]: 8 of 10 START sql view model marts.demand_forecast_features_24h ................ [RUN]
+[0m06:40:35.155680 [info ] [Thread-1 (]: 9 of 10 START sql view model marts.demand_forecast_features_48h ................ [RUN]
+[0m06:40:35.157680 [info ] [Thread-3 (]: 10 of 10 START sql view model marts.demand_weather_training_base ............... [RUN]
+[0m06:40:35.157680 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.gridops.stg_weather_hourly, now model.gridops.demand_forecast_features_24h)
+[0m06:40:35.159213 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.gridops.int_eia_demand_hourly, now model.gridops.demand_forecast_features_48h)
+[0m06:40:35.160800 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.gridops.int_weather_forecast_regional_hourly, now model.gridops.demand_weather_training_base)
+[0m06:40:35.161813 [debug] [Thread-4 (]: Began compiling node model.gridops.demand_forecast_features_24h
+[0m06:40:35.162842 [debug] [Thread-1 (]: Began compiling node model.gridops.demand_forecast_features_48h
+[0m06:40:35.163952 [debug] [Thread-3 (]: Began compiling node model.gridops.demand_weather_training_base
+[0m06:40:35.168497 [debug] [Thread-4 (]: Writing injected SQL for node "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.171759 [debug] [Thread-1 (]: Writing injected SQL for node "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.177366 [debug] [Thread-3 (]: Writing injected SQL for node "model.gridops.demand_weather_training_base"
+[0m06:40:35.179363 [debug] [Thread-4 (]: Began executing node model.gridops.demand_forecast_features_24h
+[0m06:40:35.179884 [debug] [Thread-1 (]: Began executing node model.gridops.demand_forecast_features_48h
+[0m06:40:35.184889 [debug] [Thread-4 (]: Writing runtime sql for node "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.187420 [debug] [Thread-3 (]: Began executing node model.gridops.demand_weather_training_base
+[0m06:40:35.190940 [debug] [Thread-1 (]: Writing runtime sql for node "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.196327 [debug] [Thread-3 (]: Writing runtime sql for node "model.gridops.demand_weather_training_base"
+[0m06:40:35.197550 [debug] [Thread-4 (]: Using postgres connection "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.199551 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_24h"} */
+
+  create view "gridops"."marts"."demand_forecast_features_24h__dbt_tmp"
+    
+    
+  as (
+    with demand_features as (
+
+    select
+        observed_at as target_at,
+
+        -- Prediction target
+        demand_value as target_demand,
+
+        -- Known historical demand at forecast time
+        lag(demand_value, 26) over (
+            order by observed_at
+        ) as demand_lag_26h,
+
+        lag(demand_value, 48) over (
+            order by observed_at
+        ) as demand_lag_48h,
+
+        lag(demand_value, 168) over (
+            order by observed_at
+        ) as demand_lag_168h,
+
+        lag(demand_value, 336) over (
+            order by observed_at
+        ) as demand_lag_336h,
+
+        -- Last 24 known demand observations,
+        -- ending at t - 24h.
+        avg(demand_value) over (
+            order by observed_at
+            rows between 49 preceding and 26 preceding
+        ) as demand_rolling_mean_24h,
+
+        -- Last 7 days known at forecast time,
+        -- also ending at t - 24h.
+        avg(demand_value) over (
+            order by observed_at
+            rows between 193 preceding and 26 preceding
+        ) as demand_rolling_mean_168h,
+
+        count(demand_value) over (
+            order by observed_at
+            rows between 49 preceding and 26 preceding
+        ) as demand_history_count_24h,
+
+        count(demand_value) over (
+            order by observed_at
+            rows between 193 preceding and 26 preceding
+        ) as demand_history_count_168h,
+
+        -- Calendar information for the TARGET hour.
+        -- We use PJM/Eastern local time rather than UTC.
+        extract(
+            hour from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_hour,
+
+        extract(
+            isodow from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_day_of_week,
+
+        extract(
+            month from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_month,
+
+        (
+            extract(
+                isodow from observed_at
+                at time zone 'America/New_York'
+            ) in (6, 7)
+        ) as is_weekend
+
+    from "gridops"."intermediate"."int_eia_demand_hourly"
+
+),
+
+forecast_weather as (
+
+    select
+        valid_at,
+
+        mean_temperature_forecast_24h,
+        min_temperature_forecast_24h,
+        max_temperature_forecast_24h,
+
+        mean_humidity_forecast_24h,
+        mean_dew_point_forecast_24h,
+        mean_apparent_temperature_forecast_24h,
+
+        mean_precipitation_forecast_24h,
+        mean_wind_speed_forecast_24h
+
+    from "gridops"."intermediate"."int_weather_forecast_regional_hourly"
+
+),
+
+joined as (
+
+    select
+        demand.*,
+
+        weather.mean_temperature_forecast_24h,
+        weather.min_temperature_forecast_24h,
+        weather.max_temperature_forecast_24h,
+
+        weather.max_temperature_forecast_24h
+            - weather.min_temperature_forecast_24h
+            as temperature_range_forecast_24h,
+
+        weather.mean_humidity_forecast_24h,
+        weather.mean_dew_point_forecast_24h,
+        weather.mean_apparent_temperature_forecast_24h,
+
+        weather.mean_precipitation_forecast_24h,
+        weather.mean_wind_speed_forecast_24h,
+
+        greatest(
+            weather.mean_temperature_forecast_24h - 18.0,
+            0
+        ) as cooling_degree_feature,
+
+        greatest(
+            18.0 - weather.mean_temperature_forecast_24h,
+            0
+        ) as heating_degree_feature
+
+    from demand_features as demand
+
+    left join forecast_weather as weather
+        on demand.target_at = weather.valid_at
+
+),
+
+calendar as (
+
+    select
+        target_at,
+        is_holiday,
+        is_day_before_holiday,
+        is_day_after_holiday
+
+    from "gridops"."intermediate"."int_calendar_hourly"
+
+)
+
+select
+    joined.*,
+    calendar.is_holiday,
+    calendar.is_day_before_holiday,
+    calendar.is_day_after_holiday
+from joined
+left join calendar
+    on joined.target_at = calendar.target_at
+where joined.target_at >= '2024-01-20 12:00:00+00'
+  and joined.target_at <  '2026-01-01 00:00:00+00'
+  );
+[0m06:40:35.202074 [debug] [Thread-1 (]: Using postgres connection "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.203072 [debug] [Thread-3 (]: Using postgres connection "model.gridops.demand_weather_training_base"
+[0m06:40:35.204075 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m06:40:35.205100 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_48h"} */
+
+  create view "gridops"."marts"."demand_forecast_features_48h__dbt_tmp"
+    
+    
+  as (
+    with demand_features as (
+
+    select
+        observed_at as target_at,
+
+        -- Prediction target
+        demand_value as target_demand,
+
+        -- Freshest demand assumed available when the
+        -- 48-hour forecast is issued, including a
+        -- conservative 2-hour source-lag buffer.
+        lag(demand_value, 50) over (
+            order by observed_at
+        ) as demand_lag_50h,
+
+        -- Same hour three days earlier.
+        lag(demand_value, 72) over (
+            order by observed_at
+        ) as demand_lag_72h,
+
+        -- Same hour one week earlier.
+        lag(demand_value, 168) over (
+            order by observed_at
+        ) as demand_lag_168h,
+
+        -- Same hour two weeks earlier.
+        lag(demand_value, 336) over (
+            order by observed_at
+        ) as demand_lag_336h,
+
+        -- Most recent 24 demand observations available
+        -- at forecast issue time.
+        avg(demand_value) over (
+            order by observed_at
+            rows between 73 preceding and 50 preceding
+        ) as demand_rolling_mean_24h,
+
+        -- Most recent 168 observations available
+        -- at forecast issue time.
+        avg(demand_value) over (
+            order by observed_at
+            rows between 217 preceding and 50 preceding
+        ) as demand_rolling_mean_168h,
+
+        count(demand_value) over (
+            order by observed_at
+            rows between 73 preceding and 50 preceding
+        ) as demand_history_count_24h,
+
+        count(demand_value) over (
+            order by observed_at
+            rows between 217 preceding and 50 preceding
+        ) as demand_history_count_168h,
+
+        -- Calendar features for the target hour.
+        extract(
+            hour from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_hour,
+
+        extract(
+            isodow from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_day_of_week,
+
+        extract(
+            month from observed_at
+            at time zone 'America/New_York'
+        )::integer as target_month,
+
+        (
+            extract(
+                isodow from observed_at
+                at time zone 'America/New_York'
+            ) in (6, 7)
+        ) as is_weekend
+
+    from "gridops"."intermediate"."int_eia_demand_hourly"
+
+),
+
+forecast_weather as (
+
+    select
+        valid_at,
+
+        mean_temperature_forecast_48h,
+        min_temperature_forecast_48h,
+        max_temperature_forecast_48h,
+
+        mean_humidity_forecast_48h,
+        mean_dew_point_forecast_48h,
+        mean_apparent_temperature_forecast_48h,
+
+        mean_precipitation_forecast_48h,
+        mean_wind_speed_forecast_48h
+
+    from "gridops"."intermediate"."int_weather_forecast_regional_hourly"
+
+),
+
+joined as (
+
+    select
+        demand.*,
+
+        weather.mean_temperature_forecast_48h,
+        weather.min_temperature_forecast_48h,
+        weather.max_temperature_forecast_48h,
+
+        weather.max_temperature_forecast_48h
+            - weather.min_temperature_forecast_48h
+            as temperature_range_forecast_48h,
+
+        weather.mean_humidity_forecast_48h,
+        weather.mean_dew_point_forecast_48h,
+        weather.mean_apparent_temperature_forecast_48h,
+
+        weather.mean_precipitation_forecast_48h,
+        weather.mean_wind_speed_forecast_48h,
+
+        greatest(
+            weather.mean_temperature_forecast_48h - 18.0,
+            0
+        ) as cooling_degree_feature,
+
+        greatest(
+            18.0 - weather.mean_temperature_forecast_48h,
+            0
+        ) as heating_degree_feature
+
+    from demand_features as demand
+
+    left join forecast_weather as weather
+        on demand.target_at = weather.valid_at
+
+),
+
+calendar as (
+
+    select
+        target_at,
+        is_holiday,
+        is_day_before_holiday,
+        is_day_after_holiday
+
+    from "gridops"."intermediate"."int_calendar_hourly"
+    
+
+)
+
+select
+    joined.*,
+    calendar.is_holiday,
+    calendar.is_day_before_holiday,
+    calendar.is_day_after_holiday
+from joined
+left join calendar
+    on joined.target_at = calendar.target_at
+where joined.target_at >= '2024-01-20 12:00:00+00'
+  and joined.target_at <  '2026-01-01 00:00:00+00'
+  );
+[0m06:40:35.206841 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_weather_training_base"} */
+
+  create view "gridops"."marts"."demand_weather_training_base__dbt_tmp"
+    
+    
+  as (
+    with demand as (
+
+    select *
+    from "gridops"."intermediate"."int_eia_demand_hourly"
+
+),
+
+weather as (
+
+    select *
+    from "gridops"."intermediate"."int_weather_regional_hourly"
+
+),
+
+joined as (
+
+    select
+        demand.observed_at,
+
+        demand.demand_value,
+
+        demand.is_missing_source_row,
+        demand.is_missing_demand,
+
+        weather.weather_location_count,
+
+        weather.mean_temperature_2m,
+        weather.min_temperature_2m,
+        weather.max_temperature_2m,
+
+        weather.mean_relative_humidity_2m,
+        weather.mean_dew_point_2m,
+
+        weather.mean_apparent_temperature,
+
+        weather.mean_precipitation,
+        weather.max_precipitation,
+
+        weather.mean_wind_speed_10m,
+        weather.max_wind_speed_10m
+
+    from demand
+
+    left join weather
+        on demand.observed_at = weather.observed_at
+
+)
+
+select *
+from joined
+  );
+[0m06:40:35.209359 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m06:40:35.209359 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m06:40:35.236117 [debug] [Thread-4 (]: SQL status: CREATE VIEW in 0.032 seconds
+[0m06:40:35.239741 [debug] [Thread-4 (]: Using postgres connection "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.241081 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_24h"} */
+alter table "gridops"."marts"."demand_forecast_features_24h__dbt_tmp" rename to "demand_forecast_features_24h"
+[0m06:40:35.243564 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m06:40:35.246511 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: COMMIT
+[0m06:40:35.246511 [debug] [Thread-4 (]: Using postgres connection "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.247511 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: COMMIT
+[0m06:40:35.250028 [debug] [Thread-3 (]: SQL status: CREATE VIEW in 0.040 seconds
+[0m06:40:35.254059 [debug] [Thread-3 (]: Using postgres connection "model.gridops.demand_weather_training_base"
+[0m06:40:35.255098 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.046 seconds
+[0m06:40:35.255098 [debug] [Thread-4 (]: SQL status: COMMIT in 0.007 seconds
+[0m06:40:35.256060 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_weather_training_base"} */
+alter table "gridops"."marts"."demand_weather_training_base__dbt_tmp" rename to "demand_weather_training_base"
+[0m06:40:35.260000 [debug] [Thread-1 (]: Using postgres connection "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.263217 [debug] [Thread-4 (]: Applying DROP to: "gridops"."marts"."demand_forecast_features_24h__dbt_backup"
+[0m06:40:35.264409 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_48h"} */
+alter table "gridops"."marts"."demand_forecast_features_48h__dbt_tmp" rename to "demand_forecast_features_48h"
+[0m06:40:35.266156 [debug] [Thread-4 (]: Using postgres connection "model.gridops.demand_forecast_features_24h"
+[0m06:40:35.266745 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m06:40:35.267952 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_24h"} */
+drop view if exists "gridops"."marts"."demand_forecast_features_24h__dbt_backup" cascade
+[0m06:40:35.270503 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: COMMIT
+[0m06:40:35.271161 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m06:40:35.271161 [debug] [Thread-3 (]: Using postgres connection "model.gridops.demand_weather_training_base"
+[0m06:40:35.274052 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: COMMIT
+[0m06:40:35.274052 [debug] [Thread-4 (]: SQL status: DROP VIEW in 0.003 seconds
+[0m06:40:35.274052 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: COMMIT
+[0m06:40:35.274052 [debug] [Thread-1 (]: Using postgres connection "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.279706 [debug] [Thread-4 (]: On model.gridops.demand_forecast_features_24h: Close
+[0m06:40:35.282868 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: COMMIT
+[0m06:40:35.284871 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026226640380>]}
+[0m06:40:35.287864 [debug] [Thread-3 (]: SQL status: COMMIT in 0.007 seconds
+[0m06:40:35.287864 [info ] [Thread-4 (]: 8 of 10 OK created sql view model marts.demand_forecast_features_24h ........... [[32mCREATE VIEW[0m in 0.13s]
+[0m06:40:35.292928 [debug] [Thread-3 (]: Applying DROP to: "gridops"."marts"."demand_weather_training_base__dbt_backup"
+[0m06:40:35.293928 [debug] [Thread-1 (]: SQL status: COMMIT in 0.007 seconds
+[0m06:40:35.295328 [debug] [Thread-4 (]: Finished running node model.gridops.demand_forecast_features_24h
+[0m06:40:35.297874 [debug] [Thread-3 (]: Using postgres connection "model.gridops.demand_weather_training_base"
+[0m06:40:35.302306 [debug] [Thread-1 (]: Applying DROP to: "gridops"."marts"."demand_forecast_features_48h__dbt_backup"
+[0m06:40:35.303986 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_weather_training_base"} */
+drop view if exists "gridops"."marts"."demand_weather_training_base__dbt_backup" cascade
+[0m06:40:35.305975 [debug] [Thread-1 (]: Using postgres connection "model.gridops.demand_forecast_features_48h"
+[0m06:40:35.306974 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: /* {"app": "dbt", "dbt_version": "1.12.4", "profile_name": "gridops", "target_name": "dev", "node_id": "model.gridops.demand_forecast_features_48h"} */
+drop view if exists "gridops"."marts"."demand_forecast_features_48h__dbt_backup" cascade
+[0m06:40:35.307975 [debug] [Thread-3 (]: SQL status: DROP VIEW in 0.002 seconds
+[0m06:40:35.311015 [debug] [Thread-3 (]: On model.gridops.demand_weather_training_base: Close
+[0m06:40:35.312030 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.004 seconds
+[0m06:40:35.314023 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026226633080>]}
+[0m06:40:35.317029 [debug] [Thread-1 (]: On model.gridops.demand_forecast_features_48h: Close
+[0m06:40:35.319867 [info ] [Thread-3 (]: 10 of 10 OK created sql view model marts.demand_weather_training_base .......... [[32mCREATE VIEW[0m in 0.15s]
+[0m06:40:35.322027 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '0fcf921f-dbeb-460f-9445-a64e3503a265', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622614F4A0>]}
+[0m06:40:35.323030 [debug] [Thread-3 (]: Finished running node model.gridops.demand_weather_training_base
+[0m06:40:35.325029 [info ] [Thread-1 (]: 9 of 10 OK created sql view model marts.demand_forecast_features_48h ........... [[32mCREATE VIEW[0m in 0.16s]
+[0m06:40:35.327028 [debug] [Thread-1 (]: Finished running node model.gridops.demand_forecast_features_48h
+[0m06:40:35.331089 [debug] [MainThread]: On master: COMMIT
+[0m06:40:35.333090 [debug] [MainThread]: Using postgres connection "master"
+[0m06:40:35.333090 [debug] [MainThread]: On master: COMMIT
+[0m06:40:35.335100 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m06:40:35.355435 [debug] [MainThread]: SQL status: COMMIT in 0.020 seconds
+[0m06:40:35.356436 [debug] [MainThread]: On master: Close
+[0m06:40:35.357435 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m06:40:35.358436 [debug] [MainThread]: Connection 'list_gridops' was properly closed.
+[0m06:40:35.358436 [debug] [MainThread]: Connection 'list_gridops' was properly closed.
+[0m06:40:35.359942 [debug] [MainThread]: Connection 'list_gridops' was properly closed.
+[0m06:40:35.359942 [debug] [MainThread]: Connection 'list_gridops_reference' was properly closed.
+[0m06:40:35.360950 [debug] [MainThread]: Connection 'list_gridops_intermediate' was properly closed.
+[0m06:40:35.361957 [debug] [MainThread]: Connection 'list_gridops_marts' was properly closed.
+[0m06:40:35.361957 [debug] [MainThread]: Connection 'list_gridops_staging' was properly closed.
+[0m06:40:35.362962 [debug] [MainThread]: Connection 'model.gridops.demand_forecast_features_48h' was properly closed.
+[0m06:40:35.362962 [debug] [MainThread]: Connection 'model.gridops.int_weather_regional_hourly' was properly closed.
+[0m06:40:35.363962 [debug] [MainThread]: Connection 'model.gridops.demand_weather_training_base' was properly closed.
+[0m06:40:35.364965 [debug] [MainThread]: Connection 'model.gridops.demand_forecast_features_24h' was properly closed.
+[0m06:40:35.365965 [info ] [MainThread]: 
+[0m06:40:35.367477 [info ] [MainThread]: Finished running 10 view models in 0 hours 0 minutes and 7.12 seconds (7.12s).
+[0m06:40:35.370351 [debug] [MainThread]: Command end result
+[0m06:40:35.427641 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m06:40:35.434852 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m06:40:35.440493 [debug] [MainThread]: Wrote artifact OsiDocument to dbt\target\osi_document.json
+[0m06:40:35.454110 [debug] [MainThread]: Wrote artifact RunExecutionResult to dbt\target\run_results.json
+[0m06:40:35.456122 [info ] [MainThread]: 
+[0m06:40:35.457127 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m06:40:35.458124 [info ] [MainThread]: 
+[0m06:40:35.459641 [info ] [MainThread]: Done. PASS=10 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=10
+[0m06:40:35.461270 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- DuplicateYAMLKeysDeprecation: 1 occurrence
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m06:40:35.465289 [debug] [MainThread]: Command `dbt run` succeeded at 06:40:35.465289 after 8.38 seconds
+[0m06:40:35.466289 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000262238BF800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622562E360>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002622562EAE0>]}
+[0m06:40:35.468294 [debug] [MainThread]: Flushing usage events
+[0m06:40:35.955942 [debug] [MainThread]: An error was encountered while trying to flush usage events
