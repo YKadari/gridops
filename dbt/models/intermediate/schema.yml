@@ -25,3 +25,38 @@ models:
         description: True when no demand value is available for the hour.
         data_tests:
           - not_null
+
+  - name: int_weather_regional_hourly
+    description: >
+      Hourly regional weather aggregates across six representative
+      PJM-area locations.
+
+    columns:
+      - name: observed_at
+        description: UTC hourly timestamp.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: weather_location_count
+        description: >
+          Number of representative PJM weather locations contributing
+          to the hourly aggregate.
+        data_tests:
+          - not_null
+
+      - name: mean_temperature_2m
+        data_tests:
+          - not_null
+
+      - name: min_temperature_2m
+        data_tests:
+          - not_null
+
+      - name: max_temperature_2m
+        data_tests:
+          - not_null
+
+      - name: mean_relative_humidity_2m
+        data_tests:
+          - not_null

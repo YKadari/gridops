@@ -17,7 +17,10 @@ dependencies = [
     "prefect>=3,<4",
     "boto3>=1.40,<2",
     "botocore[crt]>=1.40,<2",
-    "dbt-postgres>=1.9,<2"
+    "dbt-postgres>=1.9,<2",
+    "scikit-learn>=1.5,<2",
+    "xgboost>=2.1,<4",
+    "holidays>=0.60,<1"
 
 ]
 

@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: demand_weather_training_base
+    description: >
+      Hourly PJM electricity demand joined with regional weather
+      aggregates for the 2023-2025 modeling period.
+
+    columns:
+      - name: observed_at
+        description: UTC hourly timestamp.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: demand_value
+        description: >
+          PJM electricity demand. Known source gaps remain null.
+
+      - name: is_missing_demand
+        data_tests:
+          - not_null
+
+      - name: weather_location_count
+        data_tests:
+          - not_null
+
+      - name: mean_temperature_2m
+        data_tests:
+          - not_null
+
+      - name: mean_relative_humidity_2m
+        data_tests:
+          - not_null
+  - name: demand_forecast_features_24h
+    description: >
+      Leakage-safe feature dataset for predicting PJM electricity
+      demand 24 hours ahead using historical demand, calendar
+      information, and archived 24-hour weather forecasts.
+
+    columns:
+      - name: target_at
+        data_tests:
+          - not_null
+          - unique
+
+      - name: target_hour
+        data_tests:
+          - not_null
+
+      - name: target_day_of_week
+        data_tests:
+          - not_null
+
+      - name: target_month
+        data_tests:
+          - not_null
+
+      - name: is_weekend
+        data_tests:
+          - not_null
+
+      - name: mean_temperature_forecast_24h
+        data_tests:
+          - not_null
+
+      - name: mean_humidity_forecast_24h
+        data_tests:
+          - not_null
+
+  - name: demand_forecast_features_48h
+    description: >
+      Leakage-safe feature dataset for predicting PJM electricity
+      demand 48 hours ahead using historical demand, calendar
+      information, and archived 48-hour weather forecasts.
+
+    columns:
+      - name: target_at
+        data_tests:
+          - not_null
+          - unique
+
+      - name: target_hour
+        data_tests:
+          - not_null
+
+      - name: target_day_of_week
+        data_tests:
+          - not_null
+
+      - name: target_month
+        data_tests:
+          - not_null
+
+      - name: is_weekend
+        data_tests:
+          - not_null
+
+      - name: mean_temperature_forecast_48h
+        data_tests:
+          - not_null
+
+      - name: mean_humidity_forecast_48h
+        data_tests:
+          - not_null

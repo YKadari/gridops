@@ -32,3 +32,51 @@ sources:
             description: Units supplied by EIA.
             data_tests:
               - not_null
+  - name: weather
+    description: Raw hourly weather data ingested from Open-Meteo.
+    schema: raw
+
+    tables:
+      - name: weather_hourly
+        description: >
+          Hourly historical weather forecast observations for
+          representative PJM-area locations.
+
+        columns:
+          - name: observed_at
+            data_tests:
+              - not_null
+
+          - name: location_id
+            data_tests:
+              - not_null
+
+          - name: location_name
+            data_tests:
+              - not_null
+
+  - name: weather_forecast
+    description: >
+      Archived 24-hour and 48-hour weather forecasts from
+      Open-Meteo Previous Runs.
+
+    schema: raw
+
+    tables:
+      - name: weather_forecast_hourly
+        description: >
+          Historical fixed-lead weather forecasts for six
+          representative PJM-area locations.
+
+        columns:
+          - name: valid_at
+            data_tests:
+              - not_null
+
+          - name: location_id
+            data_tests:
+              - not_null
+
+          - name: location_name
+            data_tests:
+              - not_null
