@@ -113,3 +113,13 @@ class LiveForecastResponse(BaseModel):
     units: str = "megawatthours"
 
     eia_latest_observed_at: datetime
+
+
+
+class StoredForecastResponse(BaseModel):
+    horizon_hours: int
+    issue_at: datetime
+    target_at: datetime
+    predicted_demand: float
+    units: str = "megawatthours"
+    eia_latest_observed_at: datetime

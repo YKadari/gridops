@@ -26,6 +26,17 @@ from gridops.inference.features import (
     build_inference_features_dynamodb,
 )
 
+from gridops.storage.forecast_history import (
+    get_latest_forecast,
+)
+
+from gridops.api.schemas import (
+    LiveForecastResponse,
+    PredictionRequest24h,
+    PredictionRequest48h,
+    PredictionResponse,
+    StoredForecastResponse,
+)
 
 settings = Settings()
 
@@ -38,12 +49,9 @@ model_service = ModelService(
 
 @asynccontextmanager
 async def lifespan(
-    app: FastAPI,
-):
-    model_service.load_models()
-
-    yield
-
+        app: FastAPI,
+    ):
+        yield
 app = FastAPI(
     title="GridOps Forecasting API",
     description=(
@@ -177,6 +185,9 @@ def run_live_forecast(
         now=now,
     )
 
+
+    if not model_service.is_ready():
+        model_service.load_models()
     prediction = model_service.predict(
         horizon_hours=horizon_hours,
         features=features,
@@ -212,4 +223,46 @@ def forecast_24h() -> LiveForecastResponse:
 def forecast_48h() -> LiveForecastResponse:
     return run_live_forecast(
         horizon_hours=48
+    )
+
+
+@app.get(
+    "/forecasts/latest/{horizon_hours}",
+    response_model=StoredForecastResponse,
+)
+def latest_forecast(
+    horizon_hours: int,
+) -> StoredForecastResponse:
+
+    if horizon_hours not in (24, 48):
+        raise HTTPException(
+            status_code=400,
+            detail="horizon_hours must be 24 or 48.",
+        )
+
+    item = get_latest_forecast(
+        table_name=settings.forecast_history_table,
+        horizon_hours=horizon_hours,
+        profile_name=settings.aws_profile,
+        region_name=settings.aws_region,
+    )
+
+    if item is None:
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"No stored {horizon_hours}h "
+                "forecast was found."
+            ),
+        )
+
+    return StoredForecastResponse(
+        horizon_hours=item["horizon_hours"],
+        issue_at=item["issue_at"],
+        target_at=item["target_at"],
+        predicted_demand=item["predicted_demand"],
+        units=item["units"],
+        eia_latest_observed_at=(
+            item["eia_latest_observed_at"]
+        ),
     )
