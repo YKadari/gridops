@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: eia
+    description: Raw EIA electricity data ingested by GridOps.
+    schema: raw
+
+    tables:
+      - name: eia_region_data
+        description: Raw hourly EIA balancing-authority observations.
+
+        columns:
+          - name: period
+            description: UTC timestamp for the observation.
+            data_tests:
+              - not_null
+
+          - name: respondent
+            description: EIA balancing authority identifier.
+            data_tests:
+              - not_null
+
+          - name: data_type
+            description: EIA observation type such as demand.
+            data_tests:
+              - not_null
+
+          - name: value
+            description: Raw numeric value supplied by EIA. May be null when the source is incomplete.
+
+          - name: value_units
+            description: Units supplied by EIA.
+            data_tests:
+              - not_null

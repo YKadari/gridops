@@ -1,0 +1,13 @@
+gridops:
+  target: dev
+
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: gridops
+      password: replace_with_local_password
+      dbname: gridops
+      schema: public
+      threads: 4

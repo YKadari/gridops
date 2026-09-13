@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_eia_demand
+    description: >
+      Clean staging view of hourly PJM electricity demand sourced from
+      raw EIA data.
+
+    columns:
+      - name: observed_at
+        description: UTC timestamp associated with the hourly EIA observation.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: respondent
+        description: Balancing authority identifier.
+        data_tests:
+          - not_null
+
+      - name: respondent_name
+        description: Human-readable balancing authority name.
+        data_tests:
+          - not_null
+
+      - name: data_type
+        description: EIA data type identifier. D represents demand.
+        data_tests:
+          - not_null
+
+      - name: type_name
+        description: Human-readable EIA metric name.
+        data_tests:
+          - not_null
+
+      - name: demand_value
+        description: Demand value reported by EIA. Source nulls are intentionally preserved.
+
+      - name: value_units
+        description: Units reported by EIA.
+        data_tests:
+          - not_null
+
+      - name: ingested_at
+        description: Timestamp when GridOps loaded the observation into PostgreSQL.
+        data_tests:
+          - not_null

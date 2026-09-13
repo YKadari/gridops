@@ -16,7 +16,8 @@ dependencies = [
     "psycopg[binary]>=3.2,<4",
     "prefect>=3,<4",
     "boto3>=1.40,<2",
-    "botocore[crt]>=1.40,<2"
+    "botocore[crt]>=1.40,<2",
+    "dbt-postgres>=1.9,<2"
 
 ]
 

@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_eia_demand_hourly
+    description: >
+      Complete hourly PJM demand timeline from 2023 through 2025.
+      Missing EIA source rows and missing demand values are explicitly flagged.
+
+    columns:
+      - name: observed_at
+        description: Complete UTC hourly timestamp.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: demand_value
+        description: EIA demand value. May remain null when source data is incomplete.
+
+      - name: is_missing_source_row
+        description: True when EIA supplied no record for the expected hour.
+        data_tests:
+          - not_null
+
+      - name: is_missing_demand
+        description: True when no demand value is available for the hour.
+        data_tests:
+          - not_null
