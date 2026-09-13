@@ -15,11 +15,15 @@ from gridops.api.schemas import (
     PredictionResponse,
 )
 from gridops.config import Settings
-from gridops.database.monitoring import (
-    get_eia_freshness_status,
+from gridops.inference.readiness import (
+    get_serving_freshness_status,
 )
 from gridops.inference.features import (
     build_inference_features,
+)
+
+from gridops.inference.features import (
+    build_inference_features_dynamodb,
 )
 
 
@@ -123,12 +127,12 @@ def run_live_forecast(
         timezone.utc
     )
 
-    freshness = (
-        get_eia_freshness_status(
-            dsn=settings.postgres_dsn,
-            expected_lag_hours=2.0,
-            checked_at=now,
-        )
+    freshness = get_serving_freshness_status(
+        table_name=settings.dynamodb_demand_table,
+        profile_name=settings.aws_profile,
+        region_name=settings.aws_region,
+        expected_lag_hours=2.0,
+        checked_at=now,
     )
 
     if not freshness["is_fresh"]:
@@ -165,8 +169,10 @@ def run_live_forecast(
         features,
         issue_at,
         target_at,
-    ) = build_inference_features(
-        dsn=settings.postgres_dsn,
+    ) = build_inference_features_dynamodb(
+        table_name=settings.dynamodb_demand_table,
+        profile_name=settings.aws_profile,
+        region_name=settings.aws_region,
         horizon_hours=horizon_hours,
         now=now,
     )

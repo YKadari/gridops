@@ -51,7 +51,7 @@ def test_live_forecast_success(
 
     monkeypatch.setattr(
         api_main,
-        "get_eia_freshness_status",
+        "get_serving_freshness_status",
         lambda **kwargs: {
             "checked_at": ISSUE_AT,
             "checked_hour": ISSUE_AT,
@@ -66,7 +66,7 @@ def test_live_forecast_success(
 
     monkeypatch.setattr(
         api_main,
-        "build_inference_features",
+        "build_inference_features_dynamodb",
         lambda **kwargs: (
             {"example_feature": 1.0},
             ISSUE_AT,
@@ -129,7 +129,7 @@ def test_live_forecast_rejects_stale_eia(
 
     monkeypatch.setattr(
         api_main,
-        "get_eia_freshness_status",
+        "get_serving_freshness_status",
         lambda **kwargs: {
             "checked_at": ISSUE_AT,
             "checked_hour": ISSUE_AT,
