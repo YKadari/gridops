@@ -1,0 +1,43 @@
+FROM public.ecr.aws/lambda/python:3.12
+
+RUN dnf install -y libgomp \
+    && dnf clean all
+
+# Core/API/AWS dependencies
+RUN pip install --no-cache-dir \
+    requests==2.34.2 \
+    python-dotenv==1.2.3 \
+    pydantic-settings==2.15.0 \
+    tenacity==9.1.4 \
+    boto3==1.42.97 \
+    holidays==0.104 \
+    fastapi==0.141.1 \
+    mangum==0.22.0
+
+# Numerical dependencies deliberately split into
+# smaller image layers for reliable ECR uploads.
+RUN pip install --no-cache-dir \
+    numpy==2.5.3 \
+    scipy==1.18.1
+
+RUN pip install --no-cache-dir \
+    pandas==2.3.3
+
+RUN pip install --no-cache-dir \
+    scikit-learn==1.9.1
+
+RUN pip install --no-cache-dir \
+    xgboost-cpu==3.4.1
+
+RUN pip install --no-cache-dir \
+    mlflow-skinny==3.16.0 \
+    skops==0.14.0
+
+COPY . ${LAMBDA_TASK_ROOT}
+
+RUN pip install \
+    --no-cache-dir \
+    --no-deps \
+    .
+
+CMD ["gridops.api.lambda_handler.handler"]

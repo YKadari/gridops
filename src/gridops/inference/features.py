@@ -5,7 +5,6 @@ from zoneinfo import ZoneInfo
 
 import holidays
 import pandas as pd
-import psycopg
 
 from gridops.ingestion.weather import (
     LIVE_FORECAST_URL,
@@ -60,6 +59,8 @@ def _load_demand_history_postgres(
     start: datetime,
     end: datetime,
 ) -> pd.Series:
+
+    import psycopg
 
     query = """
         SELECT

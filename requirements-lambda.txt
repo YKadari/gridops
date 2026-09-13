@@ -1,0 +1,17 @@
+pandas==2.3.3
+requests==2.34.2
+python-dotenv==1.2.3
+pydantic-settings==2.15.0
+tenacity==9.1.4
+
+boto3==1.42.97
+
+scikit-learn==1.9.1
+xgboost-cpu==3.4.1
+holidays==0.104
+
+mlflow-skinny==3.16.0
+skops==0.14.0
+
+fastapi==0.141.1
+mangum==0.22.0
